@@ -62,3 +62,7 @@ function countdownTimer() {
     `;
     }
 }
+
+function clickPlayButton() {
+    alert("Play button clicked");
+}
