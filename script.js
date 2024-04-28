@@ -1,8 +1,9 @@
 const semicircles = document.querySelectorAll('.semicircle');
+const timer = document.querySelector('.timer');
 
 const hr = 0;
 const min = 0;
-const sec = 10;
+const sec = 5;
 
 const hours = hr * 3600000;
 const minutes = min * 60000;
@@ -33,6 +34,17 @@ function countdownTimer() {
 
 
     // timer
+    const hrs = Math.floor((remainingTime / (1000 * 60 * 60)) % 24).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+    const mins = Math.floor((remainingTime / (1000 * 60)) % 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});;
+    const secs = Math.floor((remainingTime / 1000) % 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});;
+
+    timer.innerHTML = `
+    <div>${hrs}</div>
+    <div class="colon">:</div>
+    <div>${mins}</div>
+    <div class="colon">:</div>
+    <div>${secs}</div>
+    `;
 
     // end
     if(remainingTime < 0) {
@@ -40,5 +52,13 @@ function countdownTimer() {
         semicircles[0].style.display = 'none';
         semicircles[1].style.display = 'none';
         semicircles[2].style.display = 'none';
+
+        timer.innerHTML = `
+        <div>00</div>
+        <div class="colon">:</div>
+        <div>00</div>
+        <div class="colon">:</div>
+        <div>00</div>
+    `;
     }
 }
