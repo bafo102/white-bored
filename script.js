@@ -16,6 +16,7 @@ const startTime = Date.now();
 const futureTime = setTime + startTime;
 
 const timerLoop = setInterval(countdownTimer);
+
 countdownTimer();
 
 function countdownTimer() {
@@ -34,12 +35,10 @@ function countdownTimer() {
         semicircles[1].style.transform = `rotate(${angle}deg)`;
     }
 
-
-
     // timer
     const hrs = Math.floor((remainingTime / (1000 * 60 * 60)) % 24).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
-    const mins = Math.floor((remainingTime / (1000 * 60)) % 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});;
-    const secs = Math.floor((remainingTime / 1000) % 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});;
+    const mins = Math.floor((remainingTime / (1000 * 60)) % 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+    const secs = Math.floor((remainingTime / 1000) % 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
 
     timer.innerHTML = `
     <div>${hrs}</div>
@@ -66,8 +65,14 @@ function countdownTimer() {
     }
 }
 
-function clickPlayButton() {
-    alert("Play button clicked");
+function clickPPButton() {
+    let ppButtonClass = document.getElementById("pp-button").className;
+    if (ppButtonClass == "fa-solid fa-play pp-button") {
+        document.getElementById("pp-button").className = "fa-solid fa-pause pp-button";
+    }
+    else {
+        document.getElementById("pp-button").className = "fa-solid fa-play pp-button";
+    } 
 }
 
 function openTab(evt, tabName) {
