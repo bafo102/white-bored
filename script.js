@@ -3,17 +3,20 @@ document.getElementById("defaultOpen").click();
 
 const semicircles = document.querySelectorAll('.semicircle');
 const timer = document.querySelector('.timer');
+// const endTime = document.querySelector('.endTime');
 
-const hr = 0;
-const min = 0;
-const sec = 5;
+// const minuteInput = document.getElementById("minute-input");
+const minuteInput = 38.5;
 
-const hours = hr * 3600000;
-const minutes = min * 60000;
-const seconds = sec * 1000;
-const setTime = hours + minutes + seconds;
+const hoursToMili = Math.floor(minuteInput / 60) * 3600000;
+const minutesToMili = minuteInput * 60000;
+const secondsToMili = ((minuteInput % 1) * 60) * 1000;
+const setTime = hoursToMili + minutesToMili + secondsToMili; //in mili
 const startTime = Date.now();
-const futureTime = setTime + startTime;
+const endTime = setTime + startTime;
+const endTimeDetails = new Date(endTime);
+console.log(`${endTimeDetails.toString()}`);
+
 
 const timerLoop = setInterval(countdownTimer);
 
@@ -21,7 +24,7 @@ countdownTimer();
 
 function countdownTimer() {
     const currentTime = Date.now();
-    const remainingTime = futureTime - currentTime;
+    const remainingTime = endTime - currentTime;
     const angle = (remainingTime / setTime) * 360;
 
     // progress indicator
@@ -46,6 +49,7 @@ function countdownTimer() {
     <div>${mins}</div>
     <div class="colon">:</div>
     <div>${secs}</div>
+    
     `;
 
     // end
@@ -94,5 +98,15 @@ function openTab(evt, tabName) {
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(tabName).style.display = "flex";
     evt.currentTarget.className += " active";
-  }
+}
+
+const ending = document.querySelector('.end-time');
+showEndTime();
+function showEndTime() {
+    endHours = endTimeDetails.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+    endMins = endTimeDetails.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+    ending.innerHTML = `<div>${endHours} : ${endMins}</div>`;
+}
+
+
 
