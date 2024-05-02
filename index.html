@@ -7,7 +7,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="primary-container">
+    <div class="tab">
+        <button id="defaultOpen" class="tablinks" onclick="openTab(event, 'Main')">Main</button>
+        <button class="tablinks" onclick="openTab(event, 'Supp 1')">Supp 1</button>
+        <button class="tablinks" onclick="openTab(event, 'Supp 2')">Supp 2</button>
+    </div>
+
+    <div id="Main" class="main-tab tabcontent">
         <div class="exam-info-container">Exam Info</div>
         <div class="clock-container">
             <div class="circle-container">
@@ -25,6 +31,10 @@
             </div>
         </div>
     </div>
+
+    <div id="Supp 1" class="supp-1-tab tabcontent">Supp 1</div>
+
+    <div id="Supp 2" class="supp-2-tab tabcontent">Supp 2</div>
     
 
 

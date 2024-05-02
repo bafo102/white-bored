@@ -10,12 +10,52 @@ body {
     /* border: 1px solid red; */
 }
 
-.primary-container {
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 5px 20px;
+}
+  
+.tab button:hover {
+    background-color: #ddd;
+}
+  
+
+.tab button.active {
+    background-color: #ccc;
+}
+
+
+.main-tab {
     border: 1px solid red;
     display: flex;
     justify-content: space-between;
     align-items: center
 }
+
+.supp-1-tab {
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.supp-2-tab {
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
 .exam-info-container {
     border: 1px solid green;
     width:70vw;
@@ -141,6 +181,7 @@ body {
     padding-left: 2px;
     z-index: 9;
     padding-top: 1px;
+    cursor: pointer;
 }
 
 .pp-button:hover {
@@ -154,6 +195,7 @@ body {
     padding-left: 2px;
     z-index: 9;
     padding-top: 1px;
+    cursor: pointer;
 }
 
 .pp-button:active {
@@ -167,6 +209,7 @@ body {
     padding-left: 2px;
     z-index: 9;
     padding-top: 1px;
+    cursor: pointer;
 }
 
 .reset-button {
@@ -181,6 +224,7 @@ body {
     z-index: 9;
     padding-right: 2px;
     padding-top: 1px;
+    cursor: pointer;
 }
 
 .reset-button:hover {
@@ -195,6 +239,7 @@ body {
     z-index: 9;
     padding-right: 2px;
     padding-top: 1px;
+    cursor: pointer;
 }
 
 .reset-button:active {
@@ -209,4 +254,5 @@ body {
     z-index: 9;
     padding-right: 2px;
     padding-top: 1px;
+    cursor: pointer;
 }
