@@ -23,6 +23,7 @@ body {
     outline: none;
     cursor: pointer;
     padding: 5px 20px;
+    font-size: calc(0.5vw + 1vh);
 }
   
 .tab button:hover {
@@ -64,6 +65,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: calc(1vw + 1vh);
 }
 .clock-container {
     border: 1px solid blue;
@@ -140,10 +142,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: calc(3.5vw + 2vh);
 }
 
 .timer div {
-    font-size: 3.5em;
     font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
     font-weight: 300;
     width: 10%;
@@ -151,11 +153,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 10px 0 10px;
+    margin: 0 1.5vh 0 1.5vh;
 }
 
 .timer .colon {
-    padding-bottom: 10px;
+    padding-bottom: 1.6vh;
 }
 
 .button-container {
@@ -175,7 +177,7 @@ body {
     width: 25%;
     aspect-ratio: 1 / 1;
     color: white;
-    font-size: 20px;
+    font-size: calc(1vw + 1vh);
     padding-top: 1px;
     cursor: pointer;
     z-index: 9;
@@ -223,6 +225,7 @@ body {
     height: 15%;
     top: 55%;
     z-index: 8;
+    white-space: nowrap;
 }
 
 .fa-solid.fa-bell {
@@ -230,10 +233,11 @@ body {
     position: absolute;
     left: 12%;
     top: 30%;
+    cursor: default;
 }
 
 .end-time div {
-    font-size: 110%;
+    font-size: calc(1vw + 1vh);
     font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
     font-weight: 400;
     position: absolute;
