@@ -7,39 +7,31 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="tab">
-        <button id="defaultOpen" class="tablinks" onclick="openTab(event, 'Main')">Main</button>
-        <button class="tablinks" onclick="openTab(event, 'Supp 1')">Supp 1</button>
-        <button class="tablinks" onclick="openTab(event, 'Supp 2')">Supp 2</button>
-    </div>
-
-    <div id="Main" class="main-tab tabcontent">
-        <div class="exam-info-container">Exam Info</div>
-        <div class="clock-container">
-            <div class="circle-container">
-                <div class="semicircle red"></div>
-                <div class="semicircle blue"></div>
-                <div class="semicircle white"></div>
-                <div class="top-circle"></div>
-                <div class="timer-container">
-                    <!-- <input id="minute-input" type="number"> -->
-                    <div class="timer"></div>
-                </div>
-                <div class="button-container">
+    <div class="main">
+        <div class="div-top">
+            <div class="time-input-container">
+                <div class="time-input-up">
                     <button id="pp-button" class="fa-solid fa-play pp-button" onclick="clickPPButton();"></button>
                     <button id="reset-button" class="fa-solid fa-rotate-left reset-button"></button>
                 </div>
-                <div class="end-time-container">
-                    <div class="fa-solid fa-bell"></div>
-                    <div class="end-time"></div>
+                <div class="time-input-down">
+                    <input id="quantity" name="quantity">
+                    <label>minutes</label>
+                </div>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar-up"></div>
+                <div class="progress-bar-down">
+                    <div class="fixed-bar"></div>
+                    <div class="progress-bar"></div>
                 </div>
             </div>
         </div>
+        <div class="div-bottom">
+            <div class="div-left"></div>
+            <div class="div-right"></div>
+        </div>
     </div>
-
-    <div id="Supp 1" class="supp-1-tab tabcontent">Supp 1</div>
-    <div id="Supp 2" class="supp-2-tab tabcontent">Supp 2</div>
-
     <script src="script.js"></script>
 </body>
 </html>
