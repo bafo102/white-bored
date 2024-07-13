@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>White Bored</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -10,18 +10,37 @@
     <div class="main">
         <div class="div-top">
             <div class="time-input-container">
-                <div class="time-input-up">
+                <div class="time-input-top">
                     <button id="pp-button" class="fa-solid fa-play pp-button" onclick="clickPPButton();"></button>
                     <button id="reset-button" class="fa-solid fa-rotate-left reset-button"></button>
                 </div>
-                <div class="time-input-down">
-                    <input id="quantity" name="quantity">
-                    <label>minutes</label>
+                <div class="time-input-bottom">
+                    <input placeholder="... minutes" id="quantity" name="quantity">
+                    <!-- <label>minutes</label> -->
                 </div>
             </div>
+            <div class="time-left-container">
+                <div class="timer">01:34:40
+                </div>
+            </div>
+
             <div class="progress-bar-container">
-                <div class="progress-bar-up"></div>
-                <div class="progress-bar-down">
+                <div class="progress-bar-top">
+                    <div class="time-mark">
+                        <div class="start-time">09:12</div>
+                        <div class="one-third-time">00:00</div>
+                        <div class="two-thrid-time">10:22</div>
+                        <div class="end-time">11:12</div>
+                    </div>
+                    <div class="marker">
+                        <div>|</div>
+                        <div>|</div>
+                        <div>|</div>
+                        <div>|</div>
+                    </div>
+                    
+                </div>
+                <div class="progress-bar-bottom">
                     <div class="fixed-bar"></div>
                     <div class="progress-bar"></div>
                 </div>
