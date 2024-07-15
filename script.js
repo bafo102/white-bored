@@ -1,3 +1,35 @@
+function tellTime(minuteInput) {
+    minuteInput = document.getElementById('minute-input').value;
+    second = minuteInput * 60
+    mili = second * 1000
+    startTime = Date.now()
+    endTime = startTime + mili
+    console.log(minuteInput);
+    console.log(Date());
+    console.log(endTime);
+}
+
+function updateTimeMark() {
+    minuteInput = document.getElementById('minute-input').value;
+    second = minuteInput * 60
+    mili = second * 1000
+    startTime = Date.now()
+    endTime = startTime + mili
+    startToUpdate = document.getElementById("start-time");
+    oneThirdToUpdate = document.getElementById("one-third");
+    twoThirdToUpdate = document.getElementById("two-third");
+    endToUpdate = document.getElementById("end-time");
+    startToUpdate.textContent = "00:00"
+    oneThirdToUpdate.textContent = "11:11"
+    twoThirdToUpdate.textContent = "22:22"
+    endToUpdate.textContent = "33:33"
+}
+
+let minuteInput = document.getElementById('minute-input').value;
+let startTime;
+
+
+
 // // Get the element with id="defaultOpen" and click on it
 // document.getElementById("defaultOpen").click();
 

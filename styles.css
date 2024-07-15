@@ -25,22 +25,24 @@ body {
 
 .time-input-container {
     width: 15vw;
-    margin: 1% 0% 1% 3%;
+    margin: 0 0% 0 3%;
     /* border: 1px solid green; */
 }
 
 .time-input-top {
-    height: 45%;
+    height: 50%;
     display: flex;
-    margin-right: 20%;
     justify-content: space-between;
-    align-items: start;
+    align-items: end;
+    width: 80%;
+    margin-left: 10%;
+    /* border: 1px solid brown; */
 }
 
 .fa-solid {
     border: none;
     border-radius: 50%;
-    height: 100%;
+    height: 70%;
     aspect-ratio: 1/1;
     color: white;
     font-size: 3vh;
@@ -89,19 +91,20 @@ body {
 }
 
 .time-input-bottom {
-    margin-top: 5%;
-    height: 45%;
-    margin-right: 20%;
+    height: 50%;
     display: flex;
     justify-content: center;
-    align-items: end;
+    align-items: center;
+    position: relative;
     font-size: 4vh;
+    /* border: 1px solid purple; */
 }
 
 input {
-    height: 100%;
-    width: 100%;
-    border: 0.35vh solid gray;
+    position: absolute;
+    height: 65%;
+    width: 80%;
+    /* border: 0.35vh solid gray; */
     text-align: center;
     border-radius: 4vh;
     font-size: 3vh;
@@ -128,13 +131,16 @@ input {
 }
 
 .progress-bar-top {
+    height: 35%;
+    /* border: 1px solid blue; */
+}
+
+.progress-bar-top * {
     /* border: 1px solid pink; */
-    height: 60%;
 }
 
 .time-mark {
-    /* border: 1px solid pink; */
-    height: 60%;
+    height: 100%;
     margin: 0 2.5%;
     display: flex;
     justify-content: space-between;
@@ -142,26 +148,43 @@ input {
     font-size: 3vh;
 }
 
-.marker {
-    height: 50%;
+.progress-bar-mid {
+    height: 15%;
     margin: 0 5%;
+    /* border: 1px solid red; */
     display: flex;
     justify-content: space-between;
-    align-items: start;
-    font-size: 3vh;
+    align-items: end;
+}
+
+.pipe {
+    background-color: black;
+    color: black;
+    height: 90%;
+    width: 0.25%;
+    z-index: 2;
 }
 
 .progress-bar-bottom {
-    height: 40%;
+    height: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+    /* border: 1px solid orange; */
+}
+
+.progress-bar {
+    height: 65%;
+    position: absolute;
+    width: 90%;
+    background-color:  rgb(0, 146, 172);
+    z-index: 2;
+    /* margin-bottom: 1%; */
 }
 
 .fixed-bar {
-    top: 0;
-    height: 70%;
+    height: 65%;
     position: absolute;
     width: 90%;
     background-color: rgb(143, 143, 143);
@@ -169,15 +192,6 @@ input {
     /* margin-bottom: 1%; */
 }
 
-.progress-bar {
-    top: 0;
-    height: 70%;
-    position: absolute;
-    width: 90%;
-    background-color: orange;
-    z-index: 2;
-    /* margin-bottom: 1%; */
-}
 
 .progress-bar:active {
     visibility: hidden;
@@ -192,7 +206,7 @@ input {
     background-color: lightgray;
 }
 
-.div-bottom * {
+.div-bottom > * {
     /* border: 1px solid blue; */
     height: 100vh;
     width: 100vw;
@@ -203,6 +217,15 @@ input {
     display: flex;
     width: 50%;
     margin-right: 0.25vw;
+}
+
+/* .div-bottom > .div-left > #htmeditor {
+    width: 50px;
+    margin-right: 100px;
+} */
+
+.tox-icon > svg {
+    transform: scale(0.7);
 }
 
 .div-right {
