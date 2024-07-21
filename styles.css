@@ -216,14 +216,26 @@ input {
     width: 90%;
     background-color:  rgb(0, 146, 172);
     z-index: 2;
+    /* transform-origin: right; */
     /* margin-bottom: 1%; */
+}
+
+.progress-bar:hover {
+    height: 65%;
+    position: absolute;
+    width: 45%;
+    background-color:  rgb(0, 146, 172);
+    z-index: 2;
+    transform-origin: right;
+    /* margin-bottom: 1%; */
+
 }
 
 .fixed-bar {
     height: 65%;
     position: absolute;
     width: 90%;
-    background-color: rgb(143, 143, 143);
+    background-color: rgb(207, 203, 203);
     z-index: 1;
     /* margin-bottom: 1%; */
 }

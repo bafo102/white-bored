@@ -1,40 +1,3 @@
-/*  STATUSES
-let timerStatus = "pending";
-    - buttons disabled
-    + input ready
-    - timer at 00:00:00
-    - markers at default
-    - progress bar disabled
-
-let timerStatus = "ready";
-    + buttons enabled
-    - input ready
-    + timer has value
-    - markers have value
-    + progress bar enable
-
-let timerStatus = "playing";
-    + buttons enabled
-    - input disabled
-    + timer has value
-    - markers have value
-    + progress bar transforming
-
-let timerStatus = "paused";
-    + buttons enabled
-    - input disabled
-    + timer has value
-    - markers have value
-    + progress bar holds
-
-    FUNCTIONS
-*/
-
-
-
-
-
-
 let timerStatus = "pending";
 const ppButton = document.querySelector("#pp-button");
 const resetButton = document.querySelector("#reset-button");
@@ -43,6 +6,7 @@ let endTime = 0;
 let currentTime = 0;
 let newCurrentTime = 0;
 let intervalId = '';
+const progressBar = document.querySelectorAll('.progress-bar');
 
 function getVar() {
     minuteInput = document.querySelector('#minute-input').value;
@@ -84,6 +48,59 @@ function updateReadyTimeMark() {
     endToUpdate.textContent = `${endHour}:${endMin}`;
 }
 
+function updateMarkerWhenPaused() {
+    if (newCurrentTime >= (durationInMili/3*2)) {
+        oneThirdToUpdate.textContent = "1/3";
+        twoThirdToUpdate.textContent = "2/3";
+        endToUpdate.textContent = "End";
+    }
+    else if (newCurrentTime >= (durationInMili/3)) {
+        twoThirdToUpdate.textContent = "2/3";
+        endToUpdate.textContent = "End";
+    }
+    else {
+        endToUpdate.textContent = "End";
+    }
+}
+
+function updateMarkerAfterPausing() {
+    if (newCurrentTime >= (durationInMili/3*2)) {
+        oneThird = new Date(Date.now() + (newCurrentTime/3));
+        oneThirdHour = oneThird.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+        oneThirdMin = oneThird.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+
+        twoThird = new Date(Date.now() + (newCurrentTime/3*2));
+        twoThirdHour = twoThird.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+        twoThirdMin = twoThird.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+
+        end = new Date(Date.now() + newCurrentTime);
+        endHour = end.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+        endMin = end.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+
+        oneThirdToUpdate.textContent = `${oneThirdHour}:${oneThirdMin}`;
+        twoThirdToUpdate.textContent = `${twoThirdHour}:${twoThirdMin}`;
+        endToUpdate.textContent = `${endHour}:${endMin}`;
+    }
+    else if (newCurrentTime >= (durationInMili/3)) {
+        twoThird = new Date(Date.now() + (newCurrentTime/3*2));
+        twoThirdHour = twoThird.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+        twoThirdMin = twoThird.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+
+        end = new Date(Date.now() + newCurrentTime);
+        endHour = end.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+        endMin = end.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+
+        twoThirdToUpdate.textContent = `${twoThirdHour}:${twoThirdMin}`;
+        endToUpdate.textContent = `${endHour}:${endMin}`;
+    }
+    else {
+        end = new Date(Date.now() + newCurrentTime);
+        endHour = end.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+        endMin = end.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+        endToUpdate.textContent = `${endHour}:${endMin}`;
+    }
+}
+
 function validInput() {
     getVar();
     if (minuteInput == "" || isNaN(minuteInput)) {
@@ -114,7 +131,6 @@ function validInput() {
     }
 }
 
-
 function updateButtonStatus() {
     if (document.querySelector('#pp-button').className == "fa-solid fa-play pp-button") {
         document.querySelector('#pp-button').className = "fa-solid fa-pause pp-button"
@@ -132,12 +148,14 @@ ppButton.addEventListener("click", () => {
 
     // to play for the first time
     if (timerStatus == "ready") {
+        // change stt
         timerStatus = "playing";
         console.log(timerStatus);
         // get fixed endTime
         endTime = Date.now() + durationInMili;
         getVar();
         updateReadyTimeMark();
+        // countdown
         intervalId = setInterval(countdown, 50);
     }
     // to pause
@@ -146,6 +164,8 @@ ppButton.addEventListener("click", () => {
         console.log(timerStatus);
         newCurrentTime = endTime - Date.now();
         clearInterval(intervalId);
+        // change last 3 markers to default
+        updateMarkerWhenPaused();
     }
     // to play again
     else if (timerStatus == "paused") {
@@ -153,10 +173,12 @@ ppButton.addEventListener("click", () => {
         console.log(timerStatus);
         endTime = Date.now() + newCurrentTime;
         getVar();
+        // update last 3 markers
+        updateMarkerAfterPausing();
+        // countdown
         intervalId = setInterval(countdown, 50);
     }
 });
-
 
 function countdown() {
     currentTime = endTime - Date.now();
