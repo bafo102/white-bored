@@ -6,7 +6,7 @@ let endTime = 0;
 let currentTime = 0;
 let newCurrentTime = 0;
 let intervalId = '';
-const progressBar = document.querySelectorAll('.progress-bar');
+let progressBar = document.querySelectorAll('.progress-bar');
 
 function getVar() {
     minuteInput = document.querySelector('#minute-input').value;
@@ -194,19 +194,49 @@ function countdown() {
     mins.textContent = minsToUpdate;
     secs.textContent = secsToUpdate;
 
+    
+    // update progress bar
+    progressBar[0].style.width = (currentTime / durationInMili)*100 + "%";
+    // change bar color when two third
     // end
     if (currentTime < 0) {
         clearInterval(intervalId);
         hrs.textContent = "00";
         mins.textContent = "00";
         secs.textContent = "00";
+        progressBar[0].style.width = 0 + "%";
     }
-    // update progress bar
-    // change bar color when two third
 }
 
 resetButton.addEventListener("click", () => {
-    if (confirm('Reset?')) {
+    if (currentTime < 0) {
+        clearInterval(intervalId);
+        // reset time variables
+        endTime = 0;
+        remainingTime = 0;
+        // enable input
+        document.getElementById('minute-input').disabled = false;
+        // disable buttons
+        document.getElementById('pp-button').disabled = true;
+        document.getElementById('reset-button').disabled = true;
+        // reset input value
+        document.getElementById('minute-input').value = '';
+        // reset timer
+        hrs.textContent = "00";
+        mins.textContent = "00";
+        secs.textContent = "00";
+        // reset markers
+        document.getElementById("start-time").textContent = "Start";
+        document.getElementById("one-third").textContent = "1/3";
+        document.getElementById("two-third").textContent = "2/3";
+        document.getElementById("end-time").textContent = "End";
+        // reset button status
+        document.getElementById("pp-button").className = "fa-solid fa-play pp-button";
+        // reset progress bar with
+        progressBar[0].style.width = 100 + "%";
+    }
+
+    else if (confirm('Reset?')) {
         // stop counting down
         clearInterval(intervalId);
         // reset time variables
@@ -230,6 +260,8 @@ resetButton.addEventListener("click", () => {
         document.getElementById("end-time").textContent = "End";
         // reset button status
         document.getElementById("pp-button").className = "fa-solid fa-play pp-button";
+        // reset progress bar with
+        progressBar[0].style.width = 100 + "%";
       } else {}
 });
 
