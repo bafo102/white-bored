@@ -11,11 +11,11 @@
         <div class="div-top">
             <div class="time-input-container">
                 <div class="time-input-top">
-                    <button id="pp-button" class="fa-solid fa-play pp-button"></button>
-                    <button id="reset-button" class="fa-solid fa-rotate-left reset-button" onclick="reset()"></button>
+                    <button id="pp-button" class="fa-solid fa-play pp-button" disabled></button>
+                    <button id="reset-button" class="fa-solid fa-rotate-left reset-button" disabled></button>
                 </div>
                 <div class="time-input-bottom">
-                        <input placeholder="... minutes" id="minute-input" name="quantity" onchange="updateTimeMark();" onfocus="updateTimeMark();">
+                        <input placeholder="... minutes" id="minute-input" name="quantity" onchange="validInput();" onfocus="validInput();">
                 </div>
             </div>
             <div class="timer-container">

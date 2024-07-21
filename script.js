@@ -1,77 +1,51 @@
-const hrs = document.querySelector('.hours');
-const mins = document.querySelector('.minutes');
-const secs = document.querySelector('.seconds');
-const ppBtnClass = document.getElementById("pp-button").className;
-const ppBtn = document.querySelector('#pp-button');
-const resetBtn = document.querySelector('#reset-button');
+/*  STATUSES
+let timerStatus = "pending";
+    - buttons disabled
+    + input ready
+    - timer at 00:00:00
+    - markers at default
+    - progress bar disabled
 
+let timerStatus = "ready";
+    + buttons enabled
+    - input ready
+    + timer has value
+    - markers have value
+    + progress bar enable
+
+let timerStatus = "playing";
+    + buttons enabled
+    - input disabled
+    + timer has value
+    - markers have value
+    + progress bar transforming
+
+let timerStatus = "paused";
+    + buttons enabled
+    - input disabled
+    + timer has value
+    - markers have value
+    + progress bar holds
+
+    FUNCTIONS
+*/
+
+
+
+
+
+
+let timerStatus = "pending";
+const ppButton = document.querySelector("#pp-button");
+const resetButton = document.querySelector("#reset-button");
+let durationInMili = 0;
 let endTime = 0;
-let remainingTime = 0;
-    // currentTime = Date.now();
-    // remainingTime = endTime - currentTime;
+let currentTime = 0;
+let newCurrentTime = 0;
+let intervalId = '';
 
-
-ppBtn.addEventListener("click", () => {
-    // to play
-    if (ppBtnClass == "fa-solid fa-play pp-button") {
-        // update btn
-        document.getElementById("pp-button").className = "fa-solid fa-pause pp-button";
-        // if first start
-        if (document.getElementById('minute-input').disabled == false) {
-            // disable input
-            document.getElementById('minute-input').disabled = true;
-            // finalize endTime
-            endTime = Date.now() + durationInMili;
-            // reset timeMark
-            updateTimeMark();
-        }
-        console.log(`Fixed endTime is ${endTime}`);
-        intervalId = setInterval(updateTimer, 1000);
-    }
-    
-    // to pause
-    else if (ppBtnClass == "fa-solid fa-pause pp-button") {
-        document.getElementById("pp-button").className = "fa-solid fa-play pp-button";
-        clearInterval(intervalId);
-    }
-});
-
-
-// play
-// > first start    > lock input > get fixed endTime > update timer
-// > paused         > update timer
-
-
-function updateTimer() {
-    // update timer
-    remainingTime = endTime - Date.now();
-    // console.log(`remainingTime is ${remainingTime}`);
-    hrsToUpdate = Math.floor((remainingTime / (1000 * 60 * 60)) % 24).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
-    minsToUpdate = Math.floor((remainingTime / (1000 * 60)) % 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
-    secsToUpdate = Math.floor((remainingTime / 1000) % 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
-    console.log(`${hrsToUpdate}:${minsToUpdate}:${secsToUpdate}`);
-    hrs.textContent = hrsToUpdate;
-    mins.textContent = minsToUpdate;
-    secs.textContent = secsToUpdate;
-
-    // end
-    if (remainingTime < 0) {
-        clearInterval(intervalId);
-        hrs.textContent = "00";
-        mins.textContent = "00";
-        secs.textContent = "00";
-    }
-
-    // update progress bar
-
-    // disable input
-    
-    // change bar color when two third
-
-}
-
-function updateTimeMark() {
-    minuteInput = document.getElementById('minute-input').value;
+function getVar() {
+    minuteInput = document.querySelector('#minute-input').value;
     durationInMili = minuteInput * 60 * 1000;
     start = new Date(); // Use new Date() so getHours can work
     startHour = start.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
@@ -92,160 +66,148 @@ function updateTimeMark() {
     hoursToUpdate = Math.floor(minuteInput / 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
     minutesToUpdate = (Math.floor(minuteInput) - hoursToUpdate*60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
     secondsToUpdate = Math.floor((minuteInput % 1) * 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+    hrs = document.querySelector('.hours');
+    mins = document.querySelector('.minutes');
+    secs = document.querySelector('.seconds');
+}
 
+function updateReadyTimer() {
+    hrs.textContent = hoursToUpdate;
+    mins.textContent = minutesToUpdate;
+    secs.textContent = secondsToUpdate;
+}
+
+function updateReadyTimeMark() {
+    startToUpdate.textContent = `${startHour}:${startMin}`;
+    oneThirdToUpdate.textContent = `${oneThirdHour}:${oneThirdMin}`;
+    twoThirdToUpdate.textContent = `${twoThirdHour}:${twoThirdMin}`;
+    endToUpdate.textContent = `${endHour}:${endMin}`;
+}
+
+function validInput() {
+    getVar();
     if (minuteInput == "" || isNaN(minuteInput)) {
+        timerStatus = "pending";
+        // disable buttons
+        document.getElementById('pp-button').disabled = true;
+        document.getElementById('reset-button').disabled = true;
+        // keep timer default
+        hrs.textContent = "00";
+        mins.textContent = "00";
+        secs.textContent = "00";
+        // keep markers default
         startToUpdate.textContent = "Start";
         oneThirdToUpdate.textContent = "1/3";
         twoThirdToUpdate.textContent = "2/3";
         endToUpdate.textContent = "End";
-        console.log("Input is empty or not a number")
+        // announce error
+        console.log("Input must be a number.");
     } else {
-        startToUpdate.textContent = `${startHour}:${startMin}`;
-        oneThirdToUpdate.textContent = `${oneThirdHour}:${oneThirdMin}`;
-        twoThirdToUpdate.textContent = `${twoThirdHour}:${twoThirdMin}`;
-        endToUpdate.textContent = `${endHour}:${endMin}`;
-        hrs.textContent = hoursToUpdate;
-        mins.textContent = minutesToUpdate;
-        secs.textContent = secondsToUpdate;
+        timerStatus = "ready";
+        // enable buttons
+        document.getElementById('pp-button').disabled = false;
+        document.getElementById('reset-button').disabled = false;
+        // update timer
+        updateReadyTimer()
+        // update markers
+        updateReadyTimeMark()
     }
 }
 
 
+function updateButtonStatus() {
+    if (document.querySelector('#pp-button').className == "fa-solid fa-play pp-button") {
+        document.querySelector('#pp-button').className = "fa-solid fa-pause pp-button"
+    }
+    else if (document.querySelector('#pp-button').className == "fa-solid fa-pause pp-button") {
+        document.querySelector('#pp-button').className = "fa-solid fa-play pp-button"
+    }
+}
 
+ppButton.addEventListener("click", () => {
+    // update button status
+    updateButtonStatus();
+    // disable input
+    document.getElementById('minute-input').disabled = true;
 
-// function countdownTimer() {
-//     const currentTime = Date.now();
-//     const remainingTime = endTime - currentTime;
-//     const angle = (remainingTime / setTime) * 360;
-
-//     // progress indicator
-//     if(angle > 180) {
-//         semicircles[2].style.display = 'none';
-//         semicircles[0].style.transform = 'rotate(180deg)';
-//         semicircles[1].style.transform = `rotate(${angle}deg)`;
-//     } else {
-//         semicircles[2].style.display = 'block';
-//         semicircles[0].style.transform = `rotate(${angle}deg)`;
-//         semicircles[1].style.transform = `rotate(${angle}deg)`;
-//     }
-
-// new Date() => getHours được
-// Date.now() + durationInMili => tính toán được
-
-
-
-
-
-//     
-
-
-
-
-
-function reset() {
-    if (confirm('Reset?')) {
+    // to play for the first time
+    if (timerStatus == "ready") {
+        timerStatus = "playing";
+        console.log(timerStatus);
+        // get fixed endTime
+        endTime = Date.now() + durationInMili;
+        getVar();
+        updateReadyTimeMark();
+        intervalId = setInterval(countdown, 50);
+    }
+    // to pause
+    else if (timerStatus == "playing") {
+        timerStatus = "paused";
+        console.log(timerStatus);
+        newCurrentTime = endTime - Date.now();
         clearInterval(intervalId);
+    }
+    // to play again
+    else if (timerStatus == "paused") {
+        timerStatus = "playing";
+        console.log(timerStatus);
+        endTime = Date.now() + newCurrentTime;
+        getVar();
+        intervalId = setInterval(countdown, 50);
+    }
+});
+
+
+function countdown() {
+    currentTime = endTime - Date.now();
+    // update timer
+    hrsToUpdate = Math.floor((currentTime / (1000 * 60 * 60)) % 24).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+    minsToUpdate = Math.floor((currentTime / (1000 * 60)) % 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+    secsToUpdate = Math.floor((currentTime / 1000) % 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
+    console.log(`${hrsToUpdate}:${minsToUpdate}:${secsToUpdate}`);
+    hrs = document.querySelector('.hours');
+    mins = document.querySelector('.minutes');
+    secs = document.querySelector('.seconds');
+    hrs.textContent = hrsToUpdate;
+    mins.textContent = minsToUpdate;
+    secs.textContent = secsToUpdate;
+
+    // end
+    if (currentTime < 0) {
+        clearInterval(intervalId);
+        hrs.textContent = "00";
+        mins.textContent = "00";
+        secs.textContent = "00";
+    }
+    // update progress bar
+    // change bar color when two third
+}
+
+resetButton.addEventListener("click", () => {
+    if (confirm('Reset?')) {
+        // stop counting down
+        clearInterval(intervalId);
+        // reset time variables
+        endTime = 0;
+        remainingTime = 0;
+        // enable input
         document.getElementById('minute-input').disabled = false;
+        // disable buttons
+        document.getElementById('pp-button').disabled = true;
+        document.getElementById('reset-button').disabled = true;
+        // reset input value
         document.getElementById('minute-input').value = '';
+        // reset timer
+        hrs.textContent = "00";
+        mins.textContent = "00";
+        secs.textContent = "00";
+        // reset markers
         document.getElementById("start-time").textContent = "Start";
         document.getElementById("one-third").textContent = "1/3";
         document.getElementById("two-third").textContent = "2/3";
         document.getElementById("end-time").textContent = "End";
-        hrs.textContent = "00";
-        mins.textContent = "00";
-        secs.textContent = "00";
+        // reset button status
         document.getElementById("pp-button").className = "fa-solid fa-play pp-button";
       } else {}
-}
-
-
-// const timerLoop = setInterval(countdownTimer);
-
-// countdownTimer();
-
-// function countdownTimer() {
-//     const currentTime = Date.now();
-//     const remainingTime = endTime - currentTime;
-//     const angle = (remainingTime / setTime) * 360;
-
-//     // progress indicator
-//     if(angle > 180) {
-//         semicircles[2].style.display = 'none';
-//         semicircles[0].style.transform = 'rotate(180deg)';
-//         semicircles[1].style.transform = `rotate(${angle}deg)`;
-//     } else {
-//         semicircles[2].style.display = 'block';
-//         semicircles[0].style.transform = `rotate(${angle}deg)`;
-//         semicircles[1].style.transform = `rotate(${angle}deg)`;
-//     }
-
-//     // timer
-//     const hrs = Math.floor((remainingTime / (1000 * 60 * 60)) % 24).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
-//     const mins = Math.floor((remainingTime / (1000 * 60)) % 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
-//     const secs = Math.floor((remainingTime / 1000) % 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
-
-//     timer.innerHTML = `
-//     <div>${hrs}</div>
-//     <div class="colon">:</div>
-//     <div>${mins}</div>
-//     <div class="colon">:</div>
-//     <div>${secs}</div>
-    
-//     `;
-
-//     // end
-//     if(remainingTime < 0) {
-//         clearInterval(timerLoop);
-//         semicircles[0].style.display = 'none';
-//         semicircles[1].style.display = 'none';
-//         semicircles[2].style.display = 'none';
-
-//         timer.innerHTML = `
-//         <div>00</div>
-//         <div class="colon">:</div>
-//         <div>00</div>
-//         <div class="colon">:</div>
-//         <div>00</div>
-//     `;
-//     }
-// }
-
-
-
-// function openTab(evt, tabName) {
-//     // Declare all variables
-//     var i, tabcontent, tablinks;
-  
-//     // Get all elements with class="tabcontent" and hide them
-//     tabcontent = document.getElementsByClassName("tabcontent");
-//     for (i = 0; i < tabcontent.length; i++) {
-//       tabcontent[i].style.display = "none";
-//     }
-  
-//     // Get all elements with class="tablinks" and remove the class "active"
-//     tablinks = document.getElementsByClassName("tablinks");
-//     for (i = 0; i < tablinks.length; i++) {
-//       tablinks[i].className = tablinks[i].className.replace(" active", "");
-//     }
-  
-//     // Show the current tab, and add an "active" class to the button that opened the tab
-//     document.getElementById(tabName).style.display = "flex";
-//     evt.currentTarget.className += " active";
-// }
-
-// const ending = document.querySelector('.end-time');
-// showEndTime();
-// function showEndTime() {
-//     endHours = endTimeDetails.getHours().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
-//     endMins = endTimeDetails.getMinutes().toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping: false});
-//     ending.innerHTML = `<div>${endHours} : ${endMins}</div>`;
-// }
-
-// input > update timeMark + timer
-
-// play
-// > first start    > lock input > get fixed endTime > update timer
-// > paused         > update timer
-
-// pause > stop update timer
+});
 

@@ -55,8 +55,21 @@ body {
     padding-top: 1.0%;
 }
 
+.fa-solid.fa-play.pp-button:disabled {
+    padding-left: 1.5%;
+    padding-top: 1.0%;
+    background-color: lightgray;
+    cursor: default;
+}
+
 .fa-solid.fa-pause.pp-button {
     padding-top: 1.0%;
+}
+
+.fa-solid.fa-play.pp-button:disabled {
+    padding-top: 1.0%;
+    background-color: lightgray;
+    cursor: default;
 }
 
 .fa-solid.fa-rotate-left.reset-button {
@@ -68,11 +81,11 @@ body {
     background-color: rgb(0, 146, 172);
 }
 
-.pp-button:hover {
+.pp-button:hover:enabled {
     background-color: rgb(50, 185, 209);
 }
 
-.pp-button:active {
+.pp-button:active:enabled {
     background-color: rgb(9, 86, 100);
     
 }
@@ -81,11 +94,16 @@ body {
     background-color: lightgray;
 }
 
-.reset-button:hover {
+.reset-button:disabled {
+    background-color: lightgray;
+    cursor: default;
+}
+
+.reset-button:hover:enabled {
     background-color: rgb(247, 124, 181);
 }
 
-.reset-button:active {
+.reset-button:active:enabled {
     background-color: rgb(131, 13, 68);
 }
 
