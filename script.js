@@ -265,3 +265,20 @@ resetButton.addEventListener("click", () => {
       } else {}
 });
 
+
+// function createTable() {
+//     // create a new div element
+//     const newTable = document.createElement("div");
+  
+//     // and give it some content
+//     const tableNumber = document.createTextNode("1");
+  
+//     // add the text node to the newly created div
+//     newTable.appendChild(tableNumber);
+  
+//     // add the newly created element and its content into the DOM
+//     const currentDiv = document.querySelector(".to-insert-before");
+//     const parent = document.querySelector(".room-diagram");
+//     // parent.insertBefore(newTable, currentDiv);
+//     parent.insertBefore(newTable, currentDiv);
+// }

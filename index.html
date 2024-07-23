@@ -15,7 +15,7 @@
                     <button id="reset-button" class="fa-solid fa-rotate-left reset-button" disabled></button>
                 </div>
                 <div class="time-input-bottom">
-                        <input placeholder="... minutes" id="minute-input" name="quantity" onchange="validInput();" onfocus="validInput();">
+                    <input placeholder="... minutes" id="minute-input" name="quantity" onchange="validInput();" onfocus="validInput();">
                 </div>
             </div>
             <div class="timer-container">
@@ -54,6 +54,30 @@
                 <textarea id="htmeditor"></textarea> <script src="https://htmeditor.com/js/htmeditor.min.js" htmeditor_textarea="htmeditor" full_screen="no" editor_height="600" run_local="no"></script>
             </div>
             <div class="div-right">
+                <div class="control-panel">
+                    <form action="/action_page.php">
+                        <select name="room">
+                          <option value="D102">D1.02</option>
+                          <option value="D103">D1.03</option>
+                          <option value="D104">D1.04</option>
+                          <option value="D201">D2.01</option>
+                          <option value="D202">D2.02</option>
+                          <option value="D203">D2.03</option>
+                          <option value="D204">D2.04</option>
+                          <option value="D301">D3.01</option>
+                          <option value="D302">D3.02</option>
+                          <option value="D303">D3.03</option>
+                          <option value="D304">D3.04</option>
+                          <option value="D301">D4.01</option>                          
+                        </select>
+                    </form>
+                    <input placeholder="...students" id="student-input">
+                    <button id="create-table" onclick="createTable();">Create table</button>
+                    <button id="randomize">Shuffle</button>
+                </div>
+                <div class="room-diagram">
+                    <div class="to-insert-before"></div>
+                </div>
             </div>
         </div>
     </div>
