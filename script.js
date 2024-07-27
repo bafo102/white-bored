@@ -265,6 +265,30 @@ resetButton.addEventListener("click", () => {
       } else {}
 });
 
+// table size: height, width
+const table1 = (3,10);
+// table coordinates
+const room_01 = [
+    [[0,4],[3,14]],[(0,22),(3,32)],
+    [(5,4),(8,14)],[(5,22),(8,32)],
+    [(10,4),(13,14)],[(10,22),(13,32)],
+    [(15,4),(18,14)],[(15,22),(18,32)],
+    [(20,4),(23,14)],[(20,22),(23,32)],
+    [(25,4),(28,14)],[(25,22),(28,32)]
+];
+
+function createTable() {
+    let newTable = document.createElement("div");
+    newTable.classList.add("table1");
+    let tableNumber = document.createTextNode("1");
+    newTable.appendChild(tableNumber);
+    let currentDiv = document.querySelector(".to-insert-before");
+    let parent = document.querySelector(".tables");
+    parent.insertBefore(newTable, currentDiv);
+    // for (const table of room_01) {
+    //     console.log(`${room_01}`);
+    // }
+}
 
 // function createTable() {
 //     // create a new div element

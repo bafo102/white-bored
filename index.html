@@ -51,32 +51,76 @@
         </div>
         <div class="div-bottom">
             <div class="div-left">
-                <textarea id="htmeditor"></textarea> <script src="https://htmeditor.com/js/htmeditor.min.js" htmeditor_textarea="htmeditor" full_screen="no" editor_height="600" run_local="no"></script>
+                <div class="editor-container">
+                <textarea id="htmeditor"></textarea>
+                <script src="https://htmeditor.com/js/htmeditor.min.js" htmeditor_textarea="htmeditor" full_screen="no" editor_height="600" run_local="no"></script>
+                </div>
             </div>
             <div class="div-right">
                 <div class="control-panel">
-                    <form action="/action_page.php">
-                        <select name="room">
-                          <option value="D102">D1.02</option>
-                          <option value="D103">D1.03</option>
-                          <option value="D104">D1.04</option>
-                          <option value="D201">D2.01</option>
-                          <option value="D202">D2.02</option>
-                          <option value="D203">D2.03</option>
-                          <option value="D204">D2.04</option>
-                          <option value="D301">D3.01</option>
-                          <option value="D302">D3.02</option>
-                          <option value="D303">D3.03</option>
-                          <option value="D304">D3.04</option>
-                          <option value="D301">D4.01</option>                          
-                        </select>
-                    </form>
-                    <input placeholder="...students" id="student-input">
-                    <button id="create-table" onclick="createTable();">Create table</button>
-                    <button id="randomize">Shuffle</button>
+                    <div class="room-div">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <form action="/action_page.php">
+                            <select class="room" name="room">
+                                <option value="D102">D1.02</option>
+                                <option value="D103">D1.03</option>
+                                <option value="D104">D1.04</option>
+                                <option value="D201">D2.01</option>
+                                <option value="D202">D2.02</option>
+                                <option value="D203">D2.03</option>
+                                <option value="D204">D2.04</option>
+                                <option value="D301">D3.01</option>
+                                <option value="D302">D3.02</option>
+                                <option value="D303">D3.03</option>
+                                <option value="D304">D3.04</option>
+                                <option value="D301">D4.01</option>
+                            </select>
+                        </form>
+                    </div>
+                    <div class="student-div">
+                        <i class="fa-solid fa-users"></i>
+                        <input id="student-input" type="number">
+                    </div>
+                    <div class="control-div">
+                        <button id="shuffle-button" class="fa-solid fa-shuffle"></button>
+                        <button id="clear-button" class="fa-solid fa-eraser"></button>
+                    </div>
+                    <div class="table-div">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                            <path d="M2 4H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M19.5 4L22 20M4.5 4L2 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M4 9H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <form action="/action_page.php">
+                            <select class="table" name="table">
+                                <option value="table1">table1</option>
+                                <option value="table2">table2</option>
+                                <option value="table3">table3</option>
+                                <option value="table4">table4</option>
+                                <option value="table5">table5</option> 
+                            </select>
+                        </form>
+                    </div>
+                    <div class="rotate-digagram">
+                        <button id="rotate-button" onclick="createTable();">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                                <path d="M2 15C2 18.87 5.13 22 9 22L7.95001 20.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M22 9C22 5.13 18.87 2 15 2L16.05 3.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M7 5V12C7 14.357 7 15.5355 7.73223 16.2678C8.46447 17 9.64298 17 12 17H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M17 19L17 12C17 9.64298 17 8.46447 16.2678 7.73223C15.5355 7 14.357 7 12 7L5 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="grid-toggle">
+                        <input type="checkbox" id="grid-toggle">
+                        <label for="grid-toggle">Grid</label>
+                    </div>
                 </div>
                 <div class="room-diagram">
-                    <div class="to-insert-before"></div>
+                    <div class="tables">
+                        <div class="to-insert-before"></div>
+                    </div>
+                    <div class="grid"></div>
                 </div>
             </div>
         </div>
