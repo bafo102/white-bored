@@ -330,7 +330,7 @@ select {
 .tables {
     /* visibility: hidden; */
     position: absolute;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     height: 70%;
     width: 90%;
     z-index: 2;
@@ -347,7 +347,7 @@ select {
 }
 
 .grid {
-    /* visibility: hidden; */
+    visibility: hidden;
     position: absolute;
     border: 1px solid blue;
     height: 70%;
@@ -359,3 +359,19 @@ select {
     z-index: 1;
 }
 
+.draggable {
+    width: 90px;
+    height: 80px;
+    padding: 5px;
+    float: left;
+    margin: 0 10px 10px 0;
+    font-size: .9em;
+    background-color: purple;
+    position: relative;
+    left: 100px;
+    top: 100px;
+}
+
+.ui-widget-header p, .ui-widget-content p {
+    margin: 0;
+}

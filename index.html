@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>White Bored</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css"> -->
 </head>
 <body>
     <div class="main">
@@ -118,13 +120,31 @@
                 </div>
                 <div class="room-diagram">
                     <div class="tables">
+                        <div id="draggable" class="draggable draggable2 ui-widget-content"></div>
+                        <div id="draggable2" class="draggable draggable2 ui-widget-content"></div>
                         <div class="to-insert-before"></div>
                     </div>
-                    <div class="grid"></div>
+                    <div class="grid ui-widget-header"></div>
                 </div>
             </div>
         </div>
     </div>
     <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+    <script>
+    $( function() {
+        $( ".draggable" ).draggable({ snap: true });
+        $( ".ui-widget-header" ).draggable({ snap: ".ui-widget-header" });
+        // $( ".draggable" ).draggable({ grid: [ 30, 30 ] });
+        
+        // $( ".draggable2" ).draggable({ snap: ".ui-widget-header" });
+        // $( "#draggable" ).draggable({ snap: ".ui-widget-header" });
+        // $( ".draggable" ).draggable({ snap: ".ui-widget-header" });
+        // $( ".draggable" ).draggable({ snap: ".ui-widget-header", snapMode: "outer" });
+        // $( ".draggable" ).draggable({ grid: [ 20, 20 ] });
+        // $( ".draggable5" ).draggable({ grid: [ 80, 80 ] });
+    } );
+    </script>
 </body>
 </html>

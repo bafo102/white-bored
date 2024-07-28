@@ -279,7 +279,13 @@ const room_01 = [
 
 function createTable() {
     let newTable = document.createElement("div");
-    newTable.classList.add("table1");
+    newTable.setAttribute("id", "draggable");
+    newTable.classList.add("draggable");
+    newTable.classList.add("ui-widget-content");
+    newTable.classList.add("ui-draggable");
+    newTable.classList.add("ui-draggable-handle");
+    // newTable.style.left = "100px";
+    // newTable.style.top = "100px";
     let tableNumber = document.createTextNode("1");
     newTable.appendChild(tableNumber);
     let currentDiv = document.querySelector(".to-insert-before");
@@ -289,6 +295,22 @@ function createTable() {
     //     console.log(`${room_01}`);
     // }
 }
+
+let gridToggle = document.querySelector('#grid-toggle');
+let grid = document.querySelector('.grid');
+gridToggle.addEventListener("click", () => {
+    if (gridToggle.checked) {
+        grid.style.visibility = "visible";
+        $( function() {
+            $( ".draggable" ).draggable({ grid: [ 30, 30 ] });
+        } );        
+    }
+    else {
+        grid.style.visibility = "hidden";
+    }
+});
+
+{/* <div id="draggable" class="draggable ui-widget-content ui-draggable ui-draggable-handle" style="position: relative; left: 163px; top: 134px;"></div> */}
 
 // function createTable() {
 //     // create a new div element
