@@ -329,14 +329,14 @@ select {
 
 .tables {
     /* visibility: hidden; */
-    position: absolute;
+    position: relative;
     /* border: 1px solid blue; */
     height: 70%;
     width: 90%;
     z-index: 2;
 }
 
-.table1 {
+/* .table1 {
     background-color: purple;
     position: absolute;
     left: 20px;
@@ -344,12 +344,12 @@ select {
     height: 30px;
     width: 100px;
     z-index: 3;
-}
+} */
 
-.grid {
+#grid {
     visibility: hidden;
     position: absolute;
-    border: 1px solid blue;
+    border: 1px solid #ccc;
     height: 70%;
     width: 90%;
     background-image:
@@ -360,16 +360,12 @@ select {
 }
 
 .draggable {
-    width: 90px;
-    height: 80px;
-    padding: 5px;
-    float: left;
-    margin: 0 10px 10px 0;
     font-size: .9em;
-    background-color: purple;
-    position: relative;
-    left: 100px;
-    top: 100px;
+    background-color: lightgray;
+    border: 1px solid black;
+    position: absolute;
+    left: 0px;
+    top: 0px;
 }
 
 .ui-widget-header p, .ui-widget-content p {

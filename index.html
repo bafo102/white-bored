@@ -64,6 +64,7 @@
                         <i class="fa-solid fa-location-dot"></i>
                         <form action="/action_page.php">
                             <select class="room" name="room">
+                                <option value="D102">Room</option>
                                 <option value="D102">D1.02</option>
                                 <option value="D103">D1.03</option>
                                 <option value="D104">D1.04</option>
@@ -120,11 +121,11 @@
                 </div>
                 <div class="room-diagram">
                     <div class="tables">
-                        <div id="draggable" class="draggable draggable2 ui-widget-content"></div>
-                        <div id="draggable2" class="draggable draggable2 ui-widget-content"></div>
+                        <!-- <div class="draggable ui-widget-content"></div>
+                        <div class="draggable ui-widget-content"></div> -->
                         <div class="to-insert-before"></div>
                     </div>
-                    <div class="grid ui-widget-header"></div>
+                    <div id="grid" class="grid ui-widget-header"></div>
                 </div>
             </div>
         </div>
@@ -136,14 +137,10 @@
     $( function() {
         $( ".draggable" ).draggable({ snap: true });
         $( ".ui-widget-header" ).draggable({ snap: ".ui-widget-header" });
-        // $( ".draggable" ).draggable({ grid: [ 30, 30 ] });
-        
-        // $( ".draggable2" ).draggable({ snap: ".ui-widget-header" });
-        // $( "#draggable" ).draggable({ snap: ".ui-widget-header" });
         // $( ".draggable" ).draggable({ snap: ".ui-widget-header" });
         // $( ".draggable" ).draggable({ snap: ".ui-widget-header", snapMode: "outer" });
         // $( ".draggable" ).draggable({ grid: [ 20, 20 ] });
-        // $( ".draggable5" ).draggable({ grid: [ 80, 80 ] });
+        // $( ".draggable" ).draggable({ grid: [ 80, 80 ] });
     } );
     </script>
 </body>

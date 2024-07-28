@@ -265,52 +265,68 @@ resetButton.addEventListener("click", () => {
       } else {}
 });
 
-// table size: height, width
-const table1 = (3,10);
+
 // table coordinates
 const room_01 = [
-    [[0,4],[3,14]],[(0,22),(3,32)],
-    [(5,4),(8,14)],[(5,22),(8,32)],
-    [(10,4),(13,14)],[(10,22),(13,32)],
-    [(15,4),(18,14)],[(15,22),(18,32)],
-    [(20,4),(23,14)],[(20,22),(23,32)],
-    [(25,4),(28,14)],[(25,22),(28,32)]
+    [[0,4],[3,14]],[[0,22],[3,32]],
+    [[5,4],[8,14]],[[5,22],[8,32]],
+    [[10,4],[13,14]],[[10,22],[13,32]],
+    [[15,4],[18,14]],[[15,22],[18,32]],
+    [[20,4],[23,14]],[[20,22],[23,32]],
+    [[25,4],[28,14]],[[25,22],[28,32]]
 ];
 
+let gridToggle = document.querySelector('#grid-toggle');
+let grid = document.querySelector('#grid');
+let gridCellHeight = grid.offsetHeight/36;
+let gridCellWidth = grid.offsetWidth/38;
+
 function createTable() {
-    let newTable = document.createElement("div");
-    newTable.setAttribute("id", "draggable");
-    newTable.classList.add("draggable");
-    newTable.classList.add("ui-widget-content");
-    newTable.classList.add("ui-draggable");
-    newTable.classList.add("ui-draggable-handle");
-    // newTable.style.left = "100px";
-    // newTable.style.top = "100px";
-    let tableNumber = document.createTextNode("1");
-    newTable.appendChild(tableNumber);
-    let currentDiv = document.querySelector(".to-insert-before");
-    let parent = document.querySelector(".tables");
-    parent.insertBefore(newTable, currentDiv);
-    // for (const table of room_01) {
-    //     console.log(`${room_01}`);
-    // }
+    for (let i = 0; i < room_01.length; i++) {
+        // create table as div
+        let newTable = document.createElement("div");
+        // add id to table
+        newTable.setAttribute("id", `table${i+1}`);
+        // make the text within editable
+        newTable.setAttribute("contenteditable", "true");
+        // set position, "relative" ruin the layout
+        newTable.style.setProperty('position', "absolute");
+        // add class to table
+        newTable.classList.add("draggable");
+        // make table draggable
+        $(newTable).draggable({ snap: true });
+        // set table size
+        newTable.style.setProperty('width', String((gridCellWidth * (room_01[i][1][1]-room_01[i][0][1]) +"px")));
+        newTable.style.setProperty('height', String((gridCellHeight * (room_01[i][1][0]-room_01[i][0][0]) + "px")));
+        // set table position
+        newTable.style.setProperty('left', String((gridCellWidth * room_01[i][0][1] +"px")));
+        newTable.style.setProperty('top', String((gridCellWidth * room_01[i][0][0] +"px")));
+        // console.log(`Table ${i+1} position is at ${String((gridCellWidth * room_01[i][0][1] +"px"))} left + ${String((gridCellWidth * room_01[i][0][0] +"px"))} top`);
+        // set table number
+        let tableNumber = document.createTextNode(i+1);
+        newTable.appendChild(tableNumber);
+        // finalize
+        let currentDiv = document.querySelector(".to-insert-before");
+        let parent = document.querySelector(".tables");
+        parent.insertBefore(newTable, currentDiv);
+    }
 }
 
-let gridToggle = document.querySelector('#grid-toggle');
-let grid = document.querySelector('.grid');
 gridToggle.addEventListener("click", () => {
+    console.log(gridCellWidth);
+    console.log(gridCellWidth);
+    console.log(gridCellHeight);
     if (gridToggle.checked) {
         grid.style.visibility = "visible";
-        $( function() {
-            $( ".draggable" ).draggable({ grid: [ 30, 30 ] });
-        } );        
+        $( ".draggable" ).draggable({ grid: [ gridCellWidth, gridCellHeight ] });
     }
     else {
         grid.style.visibility = "hidden";
+        $(".draggable").draggable("option", "grid", false);
     }
 });
 
-{/* <div id="draggable" class="draggable ui-widget-content ui-draggable ui-draggable-handle" style="position: relative; left: 163px; top: 134px;"></div> */}
+/* <div id="draggable" class="draggable ui-widget-content ui-draggable ui-draggable-handle" style="position: relative; left: 163px; top: 134px;"></div> */
 
 // function createTable() {
 //     // create a new div element
