@@ -277,9 +277,7 @@ const room_01 = [
 ];
 
 let gridToggle = document.querySelector('#grid-toggle');
-// let grid = document.querySelector('#grid');
-// let gridCellHeight = grid.offsetHeight/30;
-// let gridCellWidth = grid.offsetWidth/36;
+let roomTables = [];
 let gridDimensions = document.querySelector('#grid').getBoundingClientRect();
 let gridCellHeight = gridDimensions.height/30;
 let gridCellWidth = gridDimensions.width/36;
@@ -290,6 +288,8 @@ function createTable() {
         let newTable = document.createElement("div");
         // add id to table
         newTable.setAttribute("id", `table${i+1}`);
+        // add id to a list to manipulate
+        roomTables.push(`table${i+1}`);
         // make the text within editable
         newTable.setAttribute("contenteditable", "true");
         // set position, "relative" ruin the layout
@@ -297,14 +297,27 @@ function createTable() {
         // add class to table
         newTable.classList.add("draggable");
         // make table draggable
-        $(newTable).draggable({ snap: true });
+        $(newTable).draggable({
+            containment: ".tables",
+            snap: true,
+            cursor: "pointer",
+            // prevent scrolling out of parent div
+            scroll: false,
+            snapTolerance: 10,
+            // update top and left to percentage once dragging stops
+            stop: function () {
+                var l = ( 100 * parseFloat($(this).position().left / parseFloat($(this).parent().width())) ) + "%" ;
+                var t = ( 100 * parseFloat($(this).position().top / parseFloat($(this).parent().height())) ) + "%" ;
+                $(this).css("left", l);
+                $(this).css("top", t);
+            } 
+        });
         // set table size
-        newTable.style.setProperty('width', String((gridCellWidth * (room_01[i][1][1]-room_01[i][0][1]) +"px")));
-        newTable.style.setProperty('height', String((gridCellHeight * (room_01[i][1][0]-room_01[i][0][0]) + "px")));
+        newTable.style.setProperty('width', String((((100/36) * (room_01[i][1][1]-room_01[i][0][1])) +"%")));
+        newTable.style.setProperty('height', String((((100/30) * (room_01[i][1][0]-room_01[i][0][0])) +"%")));
         // set table position
-        newTable.style.setProperty('left', String((gridCellWidth * room_01[i][0][1] +"px")));
-        newTable.style.setProperty('top', String((gridCellWidth * room_01[i][0][0] +"px")));
-        // console.log(`Table ${i+1} position is at ${String((gridCellWidth * room_01[i][0][1] +"px"))} left + ${String((gridCellWidth * room_01[i][0][0] +"px"))} top`);
+        newTable.style.setProperty('left', String(((100/36) * room_01[i][0][1] + "%")));
+        newTable.style.setProperty('top', String(((100/30) * room_01[i][0][0] + "%")));
         // set table number
         let tableNumber = document.createTextNode(i+1);
         newTable.appendChild(tableNumber);
@@ -328,6 +341,7 @@ gridToggle.addEventListener("click", () => {
         $(".draggable").draggable("option", "grid", false);
     }
 });
+
 
 /* <div id="draggable" class="draggable ui-widget-content ui-draggable ui-draggable-handle" style="position: relative; left: 163px; top: 134px;"></div> */
 
