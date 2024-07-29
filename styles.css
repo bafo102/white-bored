@@ -323,7 +323,7 @@ select {
     display: flex;
     justify-content: center;
     align-items: start;
-    margin: 2%;
+    margin: 3% 2% 2% 2%;
     position: relative;
 }
 
@@ -355,7 +355,7 @@ select {
     background-image:
       repeating-linear-gradient(#ccc 0 1px, transparent 1px 100%),
       repeating-linear-gradient(90deg, #ccc 0 1px, transparent 1px 100%);
-    background-size: 2.78% 3.33%;
+    background-size: calc(100%/36) calc(100% /30);
     z-index: 1;
 }
 

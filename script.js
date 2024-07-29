@@ -277,9 +277,12 @@ const room_01 = [
 ];
 
 let gridToggle = document.querySelector('#grid-toggle');
-let grid = document.querySelector('#grid');
-let gridCellHeight = grid.offsetHeight/36;
-let gridCellWidth = grid.offsetWidth/38;
+// let grid = document.querySelector('#grid');
+// let gridCellHeight = grid.offsetHeight/30;
+// let gridCellWidth = grid.offsetWidth/36;
+let gridDimensions = document.querySelector('#grid').getBoundingClientRect();
+let gridCellHeight = gridDimensions.height/30;
+let gridCellWidth = gridDimensions.width/36;
 
 function createTable() {
     for (let i = 0; i < room_01.length; i++) {
