@@ -270,52 +270,68 @@ body {
 
 .control-panel {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: start;
     align-items: center;
     /* border: 1px solid red; */
     height: 5%;
+    margin-top: 0.5%;
 }
 
-.control-panel > * {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* border: 1px solid pink; */
-    width: 150px;
+.room-div {
+    width: 25%;
+    height: 80%;
+    margin-left: 1%;
 }
 
-.control-panel * {
-    padding: 3px;
+.table-div {
+    width: 21%;
+    height: 80%;
+    /* border: 1px solid blue; */
+    margin-left: 1%;
 }
 
-.fa-solid.fa-location-dot {
-    color: black;
-    font-size: 2.5vh;
-}
-
-/* form {
-    border: 1px solid orange;
-}
-
-select {
-    height: 100%;
-    width: 100%;
-    border-radius: 4vh;
-} */
-
-.fa-solid.fa-users {
-    color: black;
-    font-size: 2.5vh;
+.student-div {
+    width: 18%;
+    height: 80%;
+    /* border: 1px solid blue; */
+    margin-left: 1%;
 }
 
 #student-input {
-    height: 10%;
-    width: 50%;
-    border-radius: 4vh;
-    font-size: 3vh;
-    /* border: 0.35vh solid gray; */
+    width: 70%;
+    font-size: 0.8em;
     text-align: center;
-    
+}
+
+.add-on {
+    width: 30%;
+    height: 80%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 0.8em;
+}
+
+.small-button {
+    border: none;
+    border-radius: 50%;
+    height: 90%;
+    background-color: white;
+    aspect-ratio: 1/1;
+    font-size: 2.2vh;
+    cursor: pointer;
+}
+
+.small-button:hover:enabled {
+    background-color: rgb(50, 185, 209);
+}
+
+.small-button:active:enabled {
+    background-color: rgb(9, 86, 100);  
+}
+
+.grid-toggle-label {
+    font-size: 1em;
 }
 
 .room-diagram {
@@ -323,16 +339,14 @@ select {
     display: flex;
     justify-content: center;
     align-items: start;
-    margin: 3% 2% 2% 2%;
+    margin: 2% 2% 2% 2%;
     position: relative;
 }
 
 .tables {
-    /* visibility: hidden; */
     position: relative;
-    /* border: 1px solid blue; */
     height: 70%;
-    width: 90%;
+    width: 85%;
     z-index: 2;
 }
 
@@ -341,7 +355,7 @@ select {
     position: absolute;
     border: 1px solid #ccc;
     height: 70%;
-    width: 90%;
+    width: 85%;
     background-image:
       repeating-linear-gradient(#ccc 0 1px, transparent 1px 100%),
       repeating-linear-gradient(90deg, #ccc 0 1px, transparent 1px 100%);
@@ -354,9 +368,14 @@ select {
     background-color: lightgray;
     border: 1px solid black;
     position: absolute;
-    border-radius: 0px 0px 10px 10px;
 }
 
 .draggable:hover {
     cursor: pointer;
 }
+
+.half-rounded {
+    border-radius: 0px 0px 10px 10px;
+}
+
+

@@ -266,24 +266,61 @@ resetButton.addEventListener("click", () => {
 });
 
 
+
+// half-rounded
+// all-rounded
+// rectangle
+// trapezoid
+// trapezoid-2
+
+
 // table coordinates
-const room_01 = [
-    [[0,4],[3,14]],[[0,22],[3,32]],
-    [[5,4],[8,14]],[[5,22],[8,32]],
-    [[10,4],[13,14]],[[10,22],[13,32]],
-    [[15,4],[18,14]],[[15,22],[18,32]],
-    [[20,4],[23,14]],[[20,22],[23,32]],
-    [[25,4],[28,14]],[[25,22],[28,32]]
+const room_103 = [[[0,4],[3,14],"half-rounded"]];
+const room_104 = [[[0,4],[3,14],"half-rounded"]];
+const room_203 = [[[0,4],[3,14],"half-rounded"]];
+const room_204 = [[[0,4],[3,14],"half-rounded"]];
+const room_303 = [[[0,4],[3,14],"half-rounded"]];
+const room_304 = [[[0,4],[3,14],"half-rounded"]];
+const room_401 = [[[0,4],[3,14],"half-rounded"]];
+const room_01_02 = [
+    [[0,4],[3,14],"half-rounded"],[[0,22],[3,32],"half-rounded"],
+    [[5,4],[8,14],"half-rounded"],[[5,22],[8,32],"half-rounded"],
+    [[10,4],[13,14],"half-rounded"],[[10,22],[13,32],"half-rounded"],
+    [[15,4],[18,14],"half-rounded"],[[15,22],[18,32],"half-rounded"],
+    [[20,4],[23,14],"half-rounded"],[[20,22],[23,32],"half-rounded"],
+    [[25,4],[28,14],"half-rounded"],[[25,22],[28,32],"half-rounded"]
 ];
+const roomInputs = ["D1.03", "D1.04", "D2.03", "D2.04", "D3.03", "D3.04", "D4.01"]
+const rooms = [room_103, room_104, room_203, room_204, room_303, room_304, room_401]
 
 let gridToggle = document.querySelector('#grid-toggle');
 let roomTables = [];
+let room;
 let gridDimensions = document.querySelector('#grid').getBoundingClientRect();
 let gridCellHeight = gridDimensions.height/30;
 let gridCellWidth = gridDimensions.width/36;
 
-function createTable() {
-    for (let i = 0; i < room_01.length; i++) {
+function createTables() {
+    // clear current tables
+    if (roomTables.length>0) {
+        if (confirm('Clear all and create new tables?')) {
+            for (let i = 0; i < roomTables.length; i++) {
+                let tableToDelete = document.getElementById(roomTables[i]);
+                tableToDelete.remove();
+            }
+            roomTables = [];
+        }
+    }
+
+    // identify room name
+    let roomInput = document.querySelector('#room-input').value;
+    if (roomInput!="D4.01" && (roomInput.slice(-1) == "1" || roomInput.slice(-1) == "2")) {
+        room = room_01_02;
+    }
+    else {
+        room = rooms[roomInputs.indexOf(roomInput)];
+    }
+    for (let i = 0; i < room.length; i++) {
         // create table as div
         let newTable = document.createElement("div");
         // add id to table
@@ -296,6 +333,7 @@ function createTable() {
         newTable.style.setProperty('position', "absolute");
         // add class to table
         newTable.classList.add("draggable");
+        newTable.classList.add(room[i][2]);
         // make table draggable
         $(newTable).draggable({
             containment: ".tables",
@@ -313,11 +351,11 @@ function createTable() {
             } 
         });
         // set table size
-        newTable.style.setProperty('width', String((((100/36) * (room_01[i][1][1]-room_01[i][0][1])) +"%")));
-        newTable.style.setProperty('height', String((((100/30) * (room_01[i][1][0]-room_01[i][0][0])) +"%")));
+        newTable.style.setProperty('width', String((((100/36) * (room[i][1][1]-room[i][0][1])) +"%")));
+        newTable.style.setProperty('height', String((((100/30) * (room[i][1][0]-room[i][0][0])) +"%")));
         // set table position
-        newTable.style.setProperty('left', String(((100/36) * room_01[i][0][1] + "%")));
-        newTable.style.setProperty('top', String(((100/30) * room_01[i][0][0] + "%")));
+        newTable.style.setProperty('left', String(((100/36) * room[i][0][1] + "%")));
+        newTable.style.setProperty('top', String(((100/30) * room[i][0][0] + "%")));
         // set table number
         let tableNumber = document.createTextNode(i+1);
         newTable.appendChild(tableNumber);
@@ -325,6 +363,16 @@ function createTable() {
         let currentDiv = document.querySelector(".to-insert-before");
         let parent = document.querySelector(".tables");
         parent.insertBefore(newTable, currentDiv);
+    }
+}
+
+function clearTables() {
+    if (confirm('Clear all tables?')) {
+        for (let i = 0; i < roomTables.length; i++) {
+            let tableToDelete = document.getElementById(roomTables[i]);
+            tableToDelete.remove();
+        }
+        roomTables = [];
     }
 }
 
