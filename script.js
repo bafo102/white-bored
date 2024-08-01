@@ -267,31 +267,43 @@ resetButton.addEventListener("click", () => {
 
 
 
-// half-rounded
-// all-rounded
-// rectangle
-// trapezoid
-// trapezoid-2
 
+// table sizes [h, w]
+const half_rounded = [3, 10];
+const all_rounded = [4, 10];
+const rectangle = [3, 6];
+const trapezoid = [3, 4];
+const trapezoid_2 = [3, 4];
 
 // table coordinates
-const room_103 = [[[0,4],[3,14],"half-rounded"]];
-const room_104 = [[[0,4],[3,14],"half-rounded"]];
-const room_203 = [[[0,4],[3,14],"half-rounded"]];
-const room_204 = [[[0,4],[3,14],"half-rounded"]];
-const room_303 = [[[0,4],[3,14],"half-rounded"]];
-const room_304 = [[[0,4],[3,14],"half-rounded"]];
-const room_401 = [[[0,4],[3,14],"half-rounded"]];
-const room_01_02 = [
-    [[0,4],[3,14],"half-rounded"],[[0,22],[3,32],"half-rounded"],
-    [[5,4],[8,14],"half-rounded"],[[5,22],[8,32],"half-rounded"],
-    [[10,4],[13,14],"half-rounded"],[[10,22],[13,32],"half-rounded"],
-    [[15,4],[18,14],"half-rounded"],[[15,22],[18,32],"half-rounded"],
-    [[20,4],[23,14],"half-rounded"],[[20,22],[23,32],"half-rounded"],
-    [[25,4],[28,14],"half-rounded"],[[25,22],[28,32],"half-rounded"]
+const room_103 = [[[0,4],"all-rounded"]];
+const room_104 = [[[0,4],"half-rounded"]];
+const room_203 = [
+    [[1,0],"rectangle"],[[1,6],"rectangle"],[[1,18],"rectangle"],[[1,24],"rectangle"],[[1,30],"rectangle"],
+    [[7,0],"rectangle"],[[7,6],"rectangle"],[[7,18],"rectangle"],[[7,24],"rectangle"],[[7,30],"rectangle"],
+    [[13,0],"rectangle"],[[13,6],"rectangle"],[[13,18],"rectangle"],[[13,24],"rectangle"],[[13,30],"rectangle"],
+    [[19,0],"rectangle"],[[19,6],"rectangle"],[[19,18],"rectangle"],[[19,24],"rectangle"],[[19,30],"rectangle"],
+    [[25,0],"rectangle"],[[25,6],"rectangle"],[[25,18],"rectangle"],[[25,24],"rectangle"],[[25,30],"rectangle"],
 ];
-const roomInputs = ["D1.03", "D1.04", "D2.03", "D2.04", "D3.03", "D3.04", "D4.01"]
-const rooms = [room_103, room_104, room_203, room_204, room_303, room_304, room_401]
+const room_204 = [[[0,4],"half-rounded"]];
+const room_303 = [[[0,4],"half-rounded"]];
+const room_304 = [[[0,4],"half-rounded"]];
+const room_401 = [[[0,4],"half-rounded"]];
+
+const room_01_02 = [
+    [[1,4], "half-rounded"],[[1,22], "half-rounded"],
+    [[6,4], "half-rounded"],[[6,22], "half-rounded"],
+    [[11,4], "half-rounded"],[[11,22], "half-rounded"],
+    [[16,4], "half-rounded"],[[16,22], "half-rounded"],
+    [[21,4], "half-rounded"],[[21,22], "half-rounded"],
+    [[26,4], "half-rounded"],[[26,22], "half-rounded"]
+];
+
+const roomInputs = ["D1.03", "D1.04", "D2.03", "D2.04", "D3.03", "D3.04", "D4.01"];
+const rooms = [room_103, room_104, room_203, room_204, room_303, room_304, room_401];
+
+const tableNames = ["half-rounded", "all-rounded", "rectangle", "trapezoid", "trapezoid-2"];
+const tables = [half_rounded, all_rounded, rectangle, trapezoid, trapezoid_2];
 
 let gridToggle = document.querySelector('#grid-toggle');
 let roomTables = [];
@@ -333,7 +345,7 @@ function createTables() {
         newTable.style.setProperty('position', "absolute");
         // add class to table
         newTable.classList.add("draggable");
-        newTable.classList.add(room[i][2]);
+        newTable.classList.add(room[i][1]);
         // make table draggable
         $(newTable).draggable({
             containment: ".tables",
@@ -351,8 +363,9 @@ function createTables() {
             } 
         });
         // set table size
-        newTable.style.setProperty('width', String((((100/36) * (room[i][1][1]-room[i][0][1])) +"%")));
-        newTable.style.setProperty('height', String((((100/30) * (room[i][1][0]-room[i][0][0])) +"%")));
+        newTable.style.setProperty('height', String((((100/30) * (tables[tableNames.indexOf(room[i][1])][0]) +"%"))));
+        newTable.style.setProperty('width', String((((100/36) * (tables[tableNames.indexOf(room[i][1])][1]) +"%"))));
+
         // set table position
         newTable.style.setProperty('left', String(((100/36) * room[i][0][1] + "%")));
         newTable.style.setProperty('top', String(((100/30) * room[i][0][0] + "%")));
@@ -389,23 +402,3 @@ gridToggle.addEventListener("click", () => {
         $(".draggable").draggable("option", "grid", false);
     }
 });
-
-
-/* <div id="draggable" class="draggable ui-widget-content ui-draggable ui-draggable-handle" style="position: relative; left: 163px; top: 134px;"></div> */
-
-// function createTable() {
-//     // create a new div element
-//     const newTable = document.createElement("div");
-  
-//     // and give it some content
-//     const tableNumber = document.createTextNode("1");
-  
-//     // add the text node to the newly created div
-//     newTable.appendChild(tableNumber);
-  
-//     // add the newly created element and its content into the DOM
-//     const currentDiv = document.querySelector(".to-insert-before");
-//     const parent = document.querySelector(".room-diagram");
-//     // parent.insertBefore(newTable, currentDiv);
-//     parent.insertBefore(newTable, currentDiv);
-// }
