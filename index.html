@@ -81,15 +81,6 @@
                         <button id="clear-button" class="fa-solid fa-eraser small-button" onclick="clearTables();"></button>
                     </div>
                     <div class="table-div">
-                        <!-- <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000">
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                            <g id="SVGRepo_iconCarrier">
-                                <title>table</title>
-                                <path d="M18.76,6l2,4H3.24l2-4H18.76M20,4H4L1,10v2H3v7H5V16H19v3h2V12h2V10L20,4ZM5,14V12H19v2Z"></path>
-                                <rect width="24" height="24" fill="none"></rect>
-                            </g>
-                        </svg> -->
                         <select class="table" name="table">
                             <option value="Add table">Add table</option>
                             <option value="half-rounded">Half-rounded</option>
@@ -99,6 +90,7 @@
                             <option value="trapezoid-2">Trapezoid-2</option>
                         </select>
                         <button id="add-table-button" class="fa-solid fa-plus small-button"></button>
+                        <button id="del-table-button" class="fa-solid fa-minus small-button" onclick="deleteTable();"></button>
                     </div>
                     <div class="student-div">
                         <!-- <i class="fa-solid fa-users"></i> -->
@@ -109,7 +101,7 @@
                     <div class="add-on">
                         <div class="rotate-toggle">
                             <input type="checkbox" id="rotate-toggle">
-                            <label class="rotate-toggle-label" for="rotate-toggle">Rotate diagram</label>
+                            <label class="rotate-toggle-label" for="rotate-toggle">Rotate</label>
                         </div>
                         <div class="grid-toggle">
                             <input type="checkbox" id="grid-toggle">

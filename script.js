@@ -360,6 +360,7 @@ function createTables() {
                 var t = ( 100 * parseFloat($(this).position().top / parseFloat($(this).parent().height())) ) + "%" ;
                 $(this).css("left", l);
                 $(this).css("top", t);
+                $(this).click();
             } 
         });
         // set table size
@@ -387,6 +388,26 @@ function clearTables() {
         }
         roomTables = [];
     }
+}
+
+let focusedElementId = "";
+document.body.addEventListener("click", () => {
+    clickedElement = document.activeElement;
+    console.log(clickedElement);
+    if (clickedElement.id.substr(0, 5)=="table") {
+        focusedElementId = clickedElement.id;
+    }
+    else {
+        focusedElementId = "";
+    }
+})
+
+function deleteTable() {
+    let focusedTable = document.getElementById(focusedElementId);
+    roomTables.splice(roomTables.indexOf(focusedElementId),1);
+    console.log(roomTables);
+    focusedTable.remove();
+    focusedElementId = "";
 }
 
 gridToggle.addEventListener("click", () => {
