@@ -343,11 +343,16 @@ body {
     position: relative;
 }
 
+
+
 .tables {
     position: relative;
+    border: 1px solid green;
     height: 70%;
     width: 85%;
     z-index: 2;
+    /* transform: rotate(180deg); */
+    /* transform-origin: center; */
 }
 
 #grid {
@@ -364,6 +369,9 @@ body {
 }
 
 .draggable {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     font-size: .9em;
     background-color: lightgray;
     border: 1px solid black;
@@ -378,4 +386,17 @@ body {
     border-radius: 0px 0px 10px 10px;
 }
 
+.table-seat {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 50%;
+    height: 70%;
+    aspect-ratio: 1/1;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.5;
+    display: inline-block;
+    vertical-align: middle;
+    /* padding-top: 3%; */
+}
 

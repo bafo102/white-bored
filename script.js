@@ -313,17 +313,6 @@ let gridCellHeight = gridDimensions.height/30;
 let gridCellWidth = gridDimensions.width/36;
 
 function createTables() {
-    // clear current tables
-    if (roomTables.length>0) {
-        if (confirm('Clear all and create new tables?')) {
-            for (let i = 0; i < roomTables.length; i++) {
-                let tableToDelete = document.getElementById(roomTables[i]);
-                tableToDelete.remove();
-            }
-            roomTables = [];
-        }
-    }
-
     // identify room name
     let roomInput = document.querySelector('#room-input').value;
     if (roomInput!="D4.01" && (roomInput.slice(-1) == "1" || roomInput.slice(-1) == "2")) {
@@ -332,6 +321,7 @@ function createTables() {
     else {
         room = rooms[roomInputs.indexOf(roomInput)];
     }
+
     for (let i = 0; i < room.length; i++) {
         // create table as div
         let newTable = document.createElement("div");
@@ -346,6 +336,7 @@ function createTables() {
         // add class to table
         newTable.classList.add("draggable");
         newTable.classList.add(room[i][1]);
+        newTable.tabIndex = 0;
         // make table draggable
         $(newTable).draggable({
             containment: ".tables",
@@ -361,7 +352,7 @@ function createTables() {
                 $(this).css("left", l);
                 $(this).css("top", t);
                 $(this).click();
-            } 
+            }
         });
         // set table size
         newTable.style.setProperty('height', String((((100/30) * (tables[tableNames.indexOf(room[i][1])][0]) +"%"))));
@@ -371,12 +362,39 @@ function createTables() {
         newTable.style.setProperty('left', String(((100/36) * room[i][0][1] + "%")));
         newTable.style.setProperty('top', String(((100/30) * room[i][0][0] + "%")));
         // set table number
-        let tableNumber = document.createTextNode(i+1);
+        let tableNumber = document.createElement("div");
+        tableNumber.classList.add("table-seat");
+        tableNumber.textContent = "11";
         newTable.appendChild(tableNumber);
+        // let tableNumber2 = document.createElement("div");
+        // tableNumber2.classList.add("table-seat");
+        // tableNumber2.textContent = "22";
+        // newTable.appendChild(tableNumber2);
         // finalize
-        let currentDiv = document.querySelector(".to-insert-before");
+        let divToInsertBefore = document.querySelector(".to-insert-before");
         let parent = document.querySelector(".tables");
-        parent.insertBefore(newTable, currentDiv);
+        parent.insertBefore(newTable, divToInsertBefore);
+    }
+}
+
+
+function confirmAndCreateTables() {
+    // if no tables
+    if (roomTables.length==0) {
+        createTables();
+    }
+    // if tables
+    else if (roomTables.length>0) {
+        if (confirm('Clear all and create new tables?')) {
+            for (let i = 0; i < roomTables.length; i++) {
+                let tableToDelete = document.getElementById(roomTables[i]);
+                tableToDelete.remove();
+            }
+            roomTables = [];
+            createTables();
+            console.log(roomTables.length);
+        }
+        else {}
     }
 }
 
@@ -387,7 +405,8 @@ function clearTables() {
             tableToDelete.remove();
         }
         roomTables = [];
-    }
+        console.log(roomTables.length);
+    } else {}
 }
 
 let focusedElementId = "";
@@ -400,14 +419,17 @@ document.body.addEventListener("click", () => {
     else {
         focusedElementId = "";
     }
+    console.log(`Focus Id is ${focusedElementId}`)
 })
 
 function deleteTable() {
-    let focusedTable = document.getElementById(focusedElementId);
-    roomTables.splice(roomTables.indexOf(focusedElementId),1);
-    console.log(roomTables);
-    focusedTable.remove();
-    focusedElementId = "";
+    if (focusedElementId!='') {
+        let focusedTable = document.getElementById(focusedElementId);
+        roomTables.splice(roomTables.indexOf(focusedElementId),1);
+        console.log(roomTables);
+        focusedTable.remove();
+        focusedElementId = "";
+    }
 }
 
 gridToggle.addEventListener("click", () => {
