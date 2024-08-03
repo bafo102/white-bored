@@ -281,30 +281,31 @@ body {
     width: 25%;
     height: 80%;
     margin-left: 1%;
+    /* border: 1px solid blue; */
 }
 
 .table-div {
-    width: 25%;
+    width: 28%;
     height: 80%;
     /* border: 1px solid blue; */
     margin-left: 2%;
 }
 
 .student-div {
-    width: 18%;
+    width: 25%;
     height: 80%;
     /* border: 1px solid blue; */
     margin-left: 2%;
 }
 
 #student-input {
-    width: 70%;
+    width: 50%;
     font-size: 0.8em;
     text-align: center;
 }
 
 .add-on {
-    width: 25%;
+    width: 23%;
     height: 80%;
     display: flex;
     justify-content: space-evenly;
@@ -315,7 +316,7 @@ body {
 .small-button {
     border: none;
     border-radius: 50%;
-    height: 90%;
+    height: 88%;
     background-color: white;
     aspect-ratio: 1/1;
     font-size: 2.2vh;
@@ -343,11 +344,9 @@ body {
     position: relative;
 }
 
-
-
 .tables {
     position: relative;
-    border: 1px solid green;
+    /* border: 1px solid green; */
     height: 70%;
     width: 85%;
     z-index: 2;
@@ -386,7 +385,7 @@ body {
     border-radius: 0px 0px 10px 10px;
 }
 
-.table-seat {
+.seat {
     background-color: white;
     border: 1px solid black;
     border-radius: 50%;

@@ -91,11 +91,12 @@
                     </div>
                     <div class="student-div">
                         <input placeholder="...students" id="student-input" type="number">
-                        <button id="shuffle-button" class="fa-solid fa-shuffle small-button" onclick="recordTablePosition();"></button>
+                        <button id="shuffle-button" class="fa-solid fa-shuffle small-button" onclick="shuffleSeats();"></button>
+                        <button id="del-seat-button" class="fa-solid fa-eraser small-button" onclick="clearSeats();"></button>
                     </div>
                     <div class="add-on">
                         <div class="rotate-toggle">
-                            <input type="checkbox" id="rotate-toggle">
+                            <input type="checkbox" id="rotate-toggle" disabled>
                             <label class="rotate-toggle-label" for="rotate-toggle">Rotate 180°</label>
                         </div>
                         <div class="grid-toggle">
@@ -106,7 +107,7 @@
                     </div>
                 </div>
                 <div class="room-diagram">
-                    <div class="tables">
+                    <div id="tables" class="tables">
                         <div class="to-insert-before"></div>
                     </div>
                     <div id="grid" class="grid ui-widget-header"></div>

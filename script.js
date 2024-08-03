@@ -268,12 +268,12 @@ resetButton.addEventListener("click", () => {
 
 
 
-// table sizes [h, w]
-const half_rounded = [3, 10];
-const all_rounded = [4, 10];
-const rectangle = [3, 6];
-const trapezoid = [3, 4];
-const trapezoid_2 = [3, 4];
+// table sizes [h, w, seats]
+const half_rounded = [3, 10, 2];
+const all_rounded = [4, 10, 3];
+const rectangle = [3, 6, 1];
+const trapezoid = [3, 4, 1];
+const trapezoid_2 = [3, 4, 1];
 
 // table coordinates
 const room_103 = [[[0,4],"all-rounded"]];
@@ -307,6 +307,7 @@ const tables = [half_rounded, all_rounded, rectangle, trapezoid, trapezoid_2];
 
 let gridToggle = document.querySelector('#grid-toggle');
 let roomTables = [];
+let tableSeats = [];
 let room;
 let gridDimensions = document.querySelector('#grid').getBoundingClientRect();
 let gridCellHeight = gridDimensions.height/30;
@@ -330,7 +331,7 @@ function createTables() {
         // add id to a list to manipulate
         roomTables.push(`table${i+1}`);
         // make the text within editable
-        newTable.setAttribute("contenteditable", "true");
+        // newTable.setAttribute("contenteditable", "true");
         // set position, "relative" ruin the layout
         newTable.style.setProperty('position', "absolute");
         // add class to table
@@ -361,20 +362,30 @@ function createTables() {
         // set table position
         newTable.style.setProperty('left', String(((100/36) * room[i][0][1] + "%")));
         newTable.style.setProperty('top', String(((100/30) * room[i][0][0] + "%")));
-        // set table number
-        let tableNumber = document.createElement("div");
-        tableNumber.classList.add("table-seat");
-        tableNumber.textContent = "11";
-        newTable.appendChild(tableNumber);
-        // let tableNumber2 = document.createElement("div");
-        // tableNumber2.classList.add("table-seat");
-        // tableNumber2.textContent = "22";
-        // newTable.appendChild(tableNumber2);
+        // set table seat
+        for (let j = 0; j < tables[tableNames.indexOf(room[i][1])][2]; j++) {
+            let tableNumber = document.createElement("input");
+            tableNumber.setAttribute('value', "");
+            if (tableSeats.length==0) {
+                tableNumber.setAttribute('id', 'seat1');
+                tableSeats.push('seat1');
+            }
+            else {
+                tableNumber.setAttribute('id', `seat${parseInt(tableSeats[tableSeats.length-1].substr(4)) + 1}`);
+                tableSeats.push(`seat${parseInt(tableSeats[tableSeats.length-1].substr(4)) + 1}`);
+            }
+            
+            tableNumber.classList.add("seat");
+            newTable.appendChild(tableNumber);
+        }
+
         // finalize
         let divToInsertBefore = document.querySelector(".to-insert-before");
         let parent = document.querySelector(".tables");
         parent.insertBefore(newTable, divToInsertBefore);
     }
+    console.log(roomTables);
+    console.log(tableSeats);
 }
 
 
@@ -391,6 +402,8 @@ function confirmAndCreateTables() {
                 tableToDelete.remove();
             }
             roomTables = [];
+            tableSeats = [];
+            randomSequence = [];
             createTables();
             console.log(roomTables.length);
         }
@@ -405,7 +418,9 @@ function clearTables() {
             tableToDelete.remove();
         }
         roomTables = [];
-        console.log(roomTables.length);
+        tableSeats = [];
+        randomSequence = [];
+        // console.log(roomTables.length);
     } else {}
 }
 
@@ -424,13 +439,77 @@ document.body.addEventListener("click", () => {
 
 function deleteTable() {
     if (focusedElementId!='') {
+        // remove table id from list
         let focusedTable = document.getElementById(focusedElementId);
         roomTables.splice(roomTables.indexOf(focusedElementId),1);
         console.log(roomTables);
+        // delete table and seats within
         focusedTable.remove();
+        // reset focus
         focusedElementId = "";
+        // remove seat id from list
+        tableSeats = [];
+        let currentSeats = document.querySelectorAll('.seat');
+        for (let i = 0 ; i < currentSeats.length; i++) {
+            tableSeats.push(currentSeats[i].id)
+        }
+        console.log(tableSeats);
     }
 }
+
+let randomSequence = [];
+let randomNumber;
+seatsAssigned = false;
+function shuffleSeats() {
+    function randomAndAssignSeats() {
+        randomSequence = []
+        studentInput = document.querySelector('#student-input').value;
+        while (randomSequence.length < tableSeats.length) {
+            randomNumber = Math.floor(Math.random() * (tableSeats.length));
+            if (randomSequence.includes(randomNumber)) {}
+            else {
+                randomSequence.push(randomNumber);
+            }
+        }
+        console.log(randomSequence);
+        
+        for (i = 0; i < studentInput; i++) {
+            seatToSetValue = document.querySelector(`#${tableSeats[randomSequence[i]]}`);
+            seatToSetValue.value = i+1;
+        }
+    }
+    // check if seats already assigned
+    for (i = 0; i < tableSeats.length; i++) {
+        console.log(`tableSeat value is ${document.getElementById(tableSeats[i]).value}`);
+        if (document.getElementById(tableSeats[i]).value != '') {
+            seatsAssigned = true;
+            break;}
+    }
+    
+    if (seatsAssigned) {
+        if (confirm('Clear current numbers and assign new ones?')) {
+            for (i = 0; i < tableSeats.length; i++) {
+                document.getElementById(tableSeats[i]).value = '';
+            }
+            randomAndAssignSeats();
+        }
+    }
+    else {
+        randomAndAssignSeats();
+    }
+}
+
+function clearSeats() {
+    if (seatsAssigned) {
+        if (confirm("Clear all seat numbers?")) {
+            for (i = 0; i < tableSeats.length; i++) {
+                document.getElementById(tableSeats[i]).value = '';
+            }
+        }
+    }
+    seatsAssigned = false;
+}
+
 
 gridToggle.addEventListener("click", () => {
     console.log(gridCellWidth);
