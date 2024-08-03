@@ -420,6 +420,7 @@ function clearTables() {
         roomTables = [];
         tableSeats = [];
         randomSequence = [];
+        seatsAssigned = false;
         // console.log(roomTables.length);
     } else {}
 }
@@ -497,6 +498,7 @@ function shuffleSeats() {
     else {
         randomAndAssignSeats();
     }
+    seatsAssigned = true;
 }
 
 function clearSeats() {

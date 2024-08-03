@@ -220,7 +220,7 @@ body {
     height: 65%;
     position: absolute;
     width: 100%;
-    background-color:  rgb(0, 146, 172);
+    background-color: rgb(0, 146, 172);
     z-index: 2;
     /* margin-bottom: 1%; */
 }
@@ -381,6 +381,10 @@ body {
     cursor: pointer;
 }
 
+.draggable:focus {
+    border: 2px solid red;
+}
+
 .half-rounded {
     border-radius: 0px 0px 10px 10px;
 }
@@ -396,6 +400,6 @@ body {
     line-height: 1.5;
     display: inline-block;
     vertical-align: middle;
-    /* padding-top: 3%; */
+    font-size: 1.2em;
 }
 
