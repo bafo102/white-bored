@@ -389,11 +389,29 @@ body {
     border-radius: 0px 0px 10px 10px;
 }
 
+.all-rounded-2, .all-rounded-3 {
+    border-radius: 15px 20px 20px 20px;
+}
+
 .seat {
     background-color: white;
     border: 1px solid black;
     border-radius: 50%;
     height: 70%;
+    aspect-ratio: 1/1;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.5;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1.2em;
+}
+
+.all-rounded-3 .seat {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 50%;
+    height: 50%;
     aspect-ratio: 1/1;
     font-weight: bold;
     text-align: center;
