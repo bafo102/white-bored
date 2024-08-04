@@ -382,7 +382,7 @@ body {
 }
 
 .draggable:focus {
-    border: 2px solid red;
+    border: 1px solid red;
 }
 
 .half-rounded {
@@ -390,7 +390,12 @@ body {
 }
 
 .all-rounded-2, .all-rounded-3 {
-    border-radius: 15px 20px 20px 20px;
+    border-radius: 20px 20px 20px 20px;
+}
+
+.trapezoid, .trapezoid-i, .cluster, .cluster-i {
+    background-color: transparent;
+    border: 1px solid transparent;
 }
 
 .seat {
@@ -401,10 +406,6 @@ body {
     aspect-ratio: 1/1;
     font-weight: bold;
     text-align: center;
-    line-height: 1.5;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 1.2em;
 }
 
 .all-rounded-3 .seat {
@@ -415,9 +416,23 @@ body {
     aspect-ratio: 1/1;
     font-weight: bold;
     text-align: center;
-    line-height: 1.5;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 1.2em;
+}
+
+.bg-img {
+    position: absolute;
+    z-index: -1;
+}
+
+.trapezoid .seat,
+.trapezoid-i .seat,
+.cluster .seat,
+.cluster-i .seat {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 50%;
+    height: 60%;
+    aspect-ratio: 1/1;
+    font-weight: bold;
+    text-align: center;
 }
 

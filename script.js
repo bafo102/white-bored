@@ -273,12 +273,16 @@ const half_rounded = [3, 10, 2];
 const all_rounded_2 = [4, 10, 2];
 const all_rounded_3 = [4, 10, 3];
 const rectangle = [3, 6, 1];
-const trapezoid = [3, 4, 1];
-const trapezoid_i = [3, 4, 1];
-const custer = [3, 7, 3];
+const trapezoid = [3, 6, 1];
+const trapezoid_i = [3, 6, 1];
+const cluster = [3, 10, 3];
+const cluster_i = [3, 10, 3];
 
 // table coordinates
-const room_103 = [[[0,4],"all-rounded"]];
+const room_103 = [
+    [[0,4],"trapezoid"], [[0,15],"trapezoid-i"],
+    [[10,4],"cluster"], [[10,15],"cluster-i"]
+];
 const room_104 = [
     [[1,0],"rectangle"],[[1,6],"rectangle"],[[1,30],"rectangle"],
     [[7,0],"rectangle"],[[7,6],"rectangle"],[[7,18],"rectangle"],[[7,24],"rectangle"],[[7,30],"rectangle"],
@@ -334,8 +338,8 @@ const room_01_02 = [
 const roomInputs = ["D1.03", "D1.04", "D2.03", "D2.04", "D3.03", "D3.04", "D4.01", "D4.01.b"];
 const rooms = [room_103, room_104, room_203, room_204, room_303, room_304, room_401, room_401_b];
 
-const tableNames = ["half-rounded", "all-rounded-2", "all-rounded-3", "rectangle", "trapezoid", "trapezoid-i"];
-const tables = [half_rounded, all_rounded_2, all_rounded_3, rectangle, trapezoid, trapezoid_i];
+const tableNames = ["half-rounded", "all-rounded-2", "all-rounded-3", "rectangle", "trapezoid", "trapezoid-i", "cluster", "cluster-i"];
+const tables = [half_rounded, all_rounded_2, all_rounded_3, rectangle, trapezoid, trapezoid_i, cluster, cluster_i];
 
 let gridToggle = document.querySelector('#grid-toggle');
 let roomTables = [];
@@ -356,14 +360,11 @@ function createTables() {
     }
 
     for (let i = 0; i < room.length; i++) {
-        // create table as div
         let newTable = document.createElement("div");
         // add id to table
         newTable.setAttribute("id", `table${i+1}`);
         // add id to a list to manipulate
         roomTables.push(`table${i+1}`);
-        // make the text within editable
-        // newTable.setAttribute("contenteditable", "true");
         // set position, "relative" ruin the layout
         newTable.style.setProperty('position', "absolute");
         // add class to table
@@ -375,6 +376,7 @@ function createTables() {
             containment: ".tables",
             snap: true,
             cursor: "pointer",
+            zIndex: 100,
             // prevent scrolling out of parent div
             scroll: false,
             snapTolerance: 10,
@@ -387,6 +389,14 @@ function createTables() {
                 $(this).click();
             }
         });
+
+        // disable snapping for weird table
+        if (room[i][1]=="trapezoid" || room[i][1]=="trapezoid-i" || room[i][1]=="cluster" || room[i][1]=="cluster-i") {
+            $(newTable).draggable({
+                snap: false
+              });
+        }
+
         // set table size
         newTable.style.setProperty('height', String((((100/30) * (tables[tableNames.indexOf(room[i][1])][0]) +"%"))));
         newTable.style.setProperty('width', String((((100/36) * (tables[tableNames.indexOf(room[i][1])][1]) +"%"))));
@@ -394,6 +404,12 @@ function createTables() {
         // set table position
         newTable.style.setProperty('left', String(((100/36) * room[i][0][1] + "%")));
         newTable.style.setProperty('top', String(((100/30) * room[i][0][0] + "%")));
+
+        // finalize
+        let divToInsertBefore = document.querySelector(".to-insert-before");
+        let parent = document.querySelector(".tables");
+        parent.insertBefore(newTable, divToInsertBefore);
+
         // set table seat
         for (let j = 0; j < tables[tableNames.indexOf(room[i][1])][2]; j++) {
             let tableNumber = document.createElement("input");
@@ -410,11 +426,36 @@ function createTables() {
             tableNumber.classList.add("seat");
             newTable.appendChild(tableNumber);
         }
-
-        // finalize
-        let divToInsertBefore = document.querySelector(".to-insert-before");
-        let parent = document.querySelector(".tables");
-        parent.insertBefore(newTable, divToInsertBefore);
+        
+        if (room[i][1]=="trapezoid") {
+            let newTableBg = document.createElement("img");
+            newTableBg.setAttribute("class", "bg-img");
+            newTableBg.setAttribute("src", "trapezoid.png");
+            newTableBg.setAttribute("height", "100%");
+            newTable.appendChild(newTableBg);
+        }
+        else if (room[i][1]=="trapezoid-i") {
+            let newTableBg = document.createElement("img");
+            newTableBg.setAttribute("class", "bg-img");
+            newTableBg.setAttribute("src", "trapezoid-i.png");
+            newTableBg.setAttribute("height", "100%");
+            newTable.appendChild(newTableBg);
+        }
+        else if (room[i][1]=="cluster") {
+            let newTableBg = document.createElement("img");
+            newTableBg.setAttribute("class", "bg-img");
+            newTableBg.setAttribute("src", "cluster.png");
+            newTableBg.setAttribute("height", "100%");
+            newTable.appendChild(newTableBg);
+        }
+        else if (room[i][1]=="cluster-i") {
+            let newTableBg = document.createElement("img");
+            newTableBg.setAttribute("class", "bg-img");
+            newTableBg.setAttribute("src", "cluster-i.png");
+            newTableBg.setAttribute("height", "100%");
+            newTable.appendChild(newTableBg);
+        }
+        
     }
     console.log(roomTables);
     console.log(tableSeats);
@@ -558,3 +599,43 @@ gridToggle.addEventListener("click", () => {
         $(".draggable").draggable("option", "grid", false);
     }
 });
+
+
+function addTrapezoid() {
+    let trapezoid = document.getElementById("trap");
+    let ctx = trapezoid.getContext("2d");
+    ctx.beginPath();
+
+    // Define a rectangle
+    ctx.moveTo(20,20);
+    ctx.lineTo(180,20);
+    ctx.lineTo(180,100);
+    ctx.lineTo(20,100);
+    ctx.lineTo(20,20);
+
+    // Define a triangle
+    ctx.moveTo(100,20);
+    ctx.lineTo(180,100);
+    ctx.lineTo(20,100);
+    ctx.lineTo(100,20);
+
+    ctx.strokeStyle = "red";
+    ctx.stroke();
+
+    $(trapezoid).draggable({
+        containment: ".tables",
+        snap: true,
+        cursor: "pointer",
+        // prevent scrolling out of parent div
+        scroll: false,
+        snapTolerance: 10,
+        // update top and left to percentage once dragging stops
+        stop: function () {
+            var l = ( 100 * parseFloat($(this).position().left / parseFloat($(this).parent().width())) ) + "%" ;
+            var t = ( 100 * parseFloat($(this).position().top / parseFloat($(this).parent().height())) ) + "%" ;
+            $(this).css("left", l);
+            $(this).css("top", t);
+            $(this).click();
+        }
+    });
+}
