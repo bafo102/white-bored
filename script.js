@@ -458,8 +458,8 @@ function createTables() {
         }
         
     }
-    console.log(roomTables);
-    console.log(tableSeats);
+    console.log(`Tables created`)
+    reportRoom();
 }
 
 
@@ -471,6 +471,7 @@ function confirmAndCreateTables() {
     // if tables
     else if (roomTables.length>0) {
         if (confirm('Clear all and create new tables?')) {
+            console.log(`Current tables are: ${roomTables}`)
             for (let i = 0; i < roomTables.length; i++) {
                 let tableToDelete = document.getElementById(roomTables[i]);
                 tableToDelete.remove();
@@ -488,7 +489,6 @@ function confirmAndCreateTables() {
 
 function addTable() {
     let tableToAdd = document.getElementById("table-input").value;
-    console.log(tableToAdd);
     let newTable = document.createElement("div");
     // add id to table
     newTable.setAttribute("id", `table${roomTables.length + 1}`);
@@ -584,7 +584,8 @@ function addTable() {
         newTableBg.setAttribute("height", "100%");
         newTable.appendChild(newTableBg);
     }
-    
+    console.log(`Table ${tableToAdd} added`)
+    reportRoom();
 }
 
 function clearTables() {
@@ -615,6 +616,8 @@ document.body.addEventListener("click", () => {
     // console.log(`Focus Id is ${focusedElementId}`)
 })
 
+
+
 function deleteTable() {
     if (focusedElementId!='') {
         // remove table id from list
@@ -631,7 +634,7 @@ function deleteTable() {
         for (let i = 0 ; i < currentSeats.length; i++) {
             tableSeats.push(currentSeats[i].id)
         }
-        console.log(tableSeats);
+        console.log(`Current seats are ${tableSeats}`);
     }
 }
 
@@ -667,7 +670,6 @@ function shuffleSeats() {
     for (i = 0; i < tableSeats.length; i++) {
         if (document.getElementById(tableSeats[i]).value != '') {
             seatsAssigned = true;
-            console.log(`tableSeat ${i+1} is assigned with ${document.getElementById(tableSeats[i]).value}`);
             break;
         }
     }
@@ -679,6 +681,7 @@ function shuffleSeats() {
             }
             randomAndAssignSeats();
         }
+        else {}
     }
     else {
         randomAndAssignSeats();
@@ -686,15 +689,17 @@ function shuffleSeats() {
 }
 
 function clearSeats() {
-    console.log(seatsAssigned);
     if (seatsAssigned) {
         if (confirm("Clear all seat numbers?")) {
             for (i = 0; i < tableSeats.length; i++) {
                 document.getElementById(tableSeats[i]).value = '';
             }
         }
+        else {}
     }
     seatsAssigned = false;
+    console.log(`All seats cleared`);
+    reportRoom();
 }
 
 
@@ -711,3 +716,8 @@ gridToggle.addEventListener("click", () => {
         $(".draggable").draggable("option", "grid", false);
     }
 });
+
+function reportRoom() {
+    console.log(`Current tables are ${roomTables}`);
+    console.log(`Current seats are ${tableSeats}`);
+}
