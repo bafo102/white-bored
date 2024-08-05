@@ -279,53 +279,63 @@ const trapezoid_i = [3, 6, 1];
 const cluster = [3, 10, 3];
 const cluster_i = [3, 10, 3];
 
-// table coordinates
+// table coordinates [t, l, name]
 const room_103 = [
-    [[0,4],"trapezoid"], [[0,15],"trapezoid-i"],
-    [[10,4],"cluster"], [[10,15],"cluster-i"]
+    [[2,2],"trapezoid"],[[2,13],"half-rounded"],[[2,28],"trapezoid"],
+    [[8,2],"trapezoid"],[[8,13],"cluster"],[[8,28],"trapezoid"],
+    [[14,2],"trapezoid"],[[14,13],"cluster"],[[14,28],"trapezoid"],
+    [[20,2],"trapezoid"],[[20,13],"cluster"],[[20,28],"trapezoid"],
+    [[26,15],"trapezoid"]
+
 ];
 const room_104 = [
     [[1,0],"rectangle"],[[1,6],"rectangle"],[[1,30],"rectangle"],
     [[7,0],"rectangle"],[[7,6],"rectangle"],[[7,18],"rectangle"],[[7,24],"rectangle"],[[7,30],"rectangle"],
     [[13,0],"rectangle"],[[13,6],"rectangle"],[[13,18],"rectangle"],[[13,24],"rectangle"],[[13,30],"rectangle"],
     [[19,0],"rectangle"],[[19,6],"rectangle"],[[19,18],"rectangle"],[[19,24],"rectangle"],[[19,30],"rectangle"],
-    [[25,0],"rectangle"],[[25,6],"rectangle"],[[25,18],"rectangle"],[[25,24],"rectangle"],[[25,30],"rectangle"],
+    [[25,0],"rectangle"],[[25,6],"rectangle"],[[25,18],"rectangle"],[[25,24],"rectangle"],[[25,30],"rectangle"]
 ];
 const room_203 = [
     [[1,0],"rectangle"],[[1,6],"rectangle"],[[1,18],"rectangle"],[[1,24],"rectangle"],[[1,30],"rectangle"],
     [[7,0],"rectangle"],[[7,6],"rectangle"],[[7,18],"rectangle"],[[7,24],"rectangle"],[[7,30],"rectangle"],
     [[13,0],"rectangle"],[[13,6],"rectangle"],[[13,18],"rectangle"],[[13,24],"rectangle"],[[13,30],"rectangle"],
     [[19,0],"rectangle"],[[19,6],"rectangle"],[[19,18],"rectangle"],[[19,24],"rectangle"],[[19,30],"rectangle"],
-    [[25,0],"rectangle"],[[25,6],"rectangle"],[[25,18],"rectangle"],[[25,24],"rectangle"],[[25,30],"rectangle"],
+    [[25,0],"rectangle"],[[25,6],"rectangle"],[[25,18],"rectangle"],[[25,24],"rectangle"],[[25,30],"rectangle"]
 ];
-const room_204 = [[[0,4],"half-rounded"]];
+const room_204 = [
+    [[2,2],"trapezoid"],[[2,11],"rectangle-2"],[[2,19],"trapezoid"],[[2,28],"trapezoid"],
+    [[8,2],"trapezoid"],[[8,11],"rectangle-2"],[[8,19],"trapezoid"],[[8,28],"trapezoid"],
+    [[14,2],"trapezoid"],[[14,11],"trapezoid"],[[14,19],"trapezoid"],[[14,28],"trapezoid"],
+    [[20,2],"trapezoid"],[[20,11],"trapezoid"],[[20,19],"trapezoid"],[[20,28],"trapezoid"],
+    [[26,11],"trapezoid"],[[26,19],"trapezoid"]
+];
 const room_303 = [
     [[1,0],"rectangle"],[[1,6],"rectangle"],[[1,12],"rectangle"],[[1,24],"rectangle"],[[1,30],"rectangle"],
     [[7,0],"rectangle"],[[7,6],"rectangle"],[[7,12],"rectangle"],[[7,24],"rectangle"],[[7,30],"rectangle"],
     [[13,0],"rectangle"],[[13,6],"rectangle"],[[13,12],"rectangle"],[[13,24],"rectangle"],[[13,30],"rectangle"],
     [[19,0],"rectangle"],[[19,6],"rectangle"],[[19,12],"rectangle"],[[19,24],"rectangle"],[[19,30],"rectangle"],
-    [[25,0],"rectangle"],[[25,6],"rectangle"],[[25,12],"rectangle"],[[25,24],"rectangle"],[[25,30],"rectangle"],
+    [[25,0],"rectangle"],[[25,6],"rectangle"],[[25,12],"rectangle"],[[25,24],"rectangle"],[[25,30],"rectangle"]
 ]
 const room_304 = [
     [[1,0],"rectangle"],[[1,6],"rectangle"],[[1,12],"rectangle"],[[1,24],"rectangle"],[[1,30],"rectangle"],
     [[7,0],"rectangle"],[[7,6],"rectangle"],[[7,12],"rectangle"],[[7,24],"rectangle"],[[7,30],"rectangle"],
     [[13,0],"rectangle"],[[13,6],"rectangle"],[[13,12],"rectangle"],[[13,24],"rectangle"],[[13,30],"rectangle"],
     [[19,0],"rectangle"],[[19,6],"rectangle"],[[19,12],"rectangle"],[[19,24],"rectangle"],[[19,30],"rectangle"],
-    [[25,0],"rectangle"],[[25,6],"rectangle"],[[25,12],"rectangle"],[[25,24],"rectangle"],[[25,30],"rectangle"],
+    [[25,0],"rectangle"],[[25,6],"rectangle"],[[25,12],"rectangle"],[[25,24],"rectangle"],[[25,30],"rectangle"]
 ];
 const room_401 = [
     [[1,2],"all-rounded-2"],[[1,26],"all-rounded-2"],
     [[7,2],"all-rounded-2"],[[7,14],"all-rounded-2"],[[7,26],"all-rounded-2"],
     [[13,2],"all-rounded-2"],[[13,14],"all-rounded-2"],[[13,26],"all-rounded-2"],
     [[19,2],"all-rounded-2"],[[19,14],"all-rounded-2"],[[19,26],"all-rounded-2"],
-    [[25,2],"all-rounded-2"],[[25,14],"all-rounded-2"],[[25,26],"all-rounded-2"],
+    [[25,2],"all-rounded-2"],[[25,14],"all-rounded-2"],[[25,26],"all-rounded-2"]
 ];
 const room_401_b = [
     [[1,2],"all-rounded-3"],[[1,26],"all-rounded-3"],
     [[7,2],"all-rounded-3"],[[7,14],"all-rounded-3"],[[7,26],"all-rounded-3"],
     [[13,2],"all-rounded-3"],[[13,14],"all-rounded-3"],[[13,26],"all-rounded-3"],
     [[19,2],"all-rounded-3"],[[19,14],"all-rounded-3"],[[19,26],"all-rounded-3"],
-    [[25,2],"all-rounded-3"],[[25,14],"all-rounded-3"],[[25,26],"all-rounded-3"],
+    [[25,2],"all-rounded-3"],[[25,14],"all-rounded-3"],[[25,26],"all-rounded-3"]
 ];
 const room_01_02 = [
     [[1,4], "half-rounded"],[[1,22], "half-rounded"],
@@ -589,7 +599,7 @@ function addTable() {
 }
 
 function clearTables() {
-    console.log(roomTables);
+    console.log(`${roomTables.length} tables to be cleared`);
     if (confirm('Clear all tables?')) {
         for (let i = 0; i < roomTables.length; i++) {
             let tableToDelete = document.getElementById(roomTables[i]);
@@ -599,7 +609,7 @@ function clearTables() {
         tableSeats = [];
         randomSequence = [];
         seatsAssigned = false;
-        console.log(roomTables.length);
+        console.log(`All tables cleared`)
     } else {}
 }
 
@@ -645,7 +655,8 @@ function shuffleSeats() {
     function randomAndAssignSeats() {
         randomSequence = []
         studentInput = document.querySelector('#student-input').value;
-        if (studentInput!="" || studentInput!=0) {
+        if (studentInput!="" && studentInput!=0 && roomTables.length>0) {
+            console.log("random Sequence generated")
             if (studentInput>tableSeats.length) {
                 studentInput = tableSeats.length;
             }
