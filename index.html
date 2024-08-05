@@ -79,16 +79,19 @@
                         <button id="clear-button" class="fa-solid fa-eraser small-button" onclick="clearTables();"></button>
                     </div>
                     <div class="table-div">
-                        <select class="table" name="table">
+                        <select id="table-input" class="table" name="table">
                             <option value="Add table">Add table</option>
-                            <option value="half-rounded">Half-rounded</option>
-                            <option value="all-rounded">All-rounded</option>
-                            <option value="rectangle">Rectangle</option>
-                            <option value="trapezoid">Trapezoid</option>
-                            <option value="trapezoid-2">Trapezoid-i</option>
-                            <option value="trapezoid-2">Cluster</option>
+                            <option value="half-rounded">Half-rounded [2]</option>
+                            <option value="all-rounded-2">All-rounded [2]</option>
+                            <option value="all-rounded-3">All-rounded [3]</option>
+                            <option value="rectangle">Rectangle [1]</option>
+                            <option value="rectangle-2">Rectangle [2]</option>
+                            <option value="trapezoid">Trapezoid [1]</option>
+                            <option value="trapezoid-i">Trapezoid-i [1]</option>
+                            <option value="cluster">Cluster [3]</option>
+                            <option value="cluster-i">Cluster-i [3]</option>
                         </select>
-                        <button id="add-table-button" class="fa-solid fa-plus small-button" onclick="addTrapezoid();"></button>
+                        <button id="add-table-button" class="fa-solid fa-plus small-button" onclick="addTable();"></button>
                         <button id="del-table-button" class="fa-solid fa-minus small-button" onclick="deleteTable();"></button>
                     </div>
                     <div class="student-div">
@@ -109,11 +112,6 @@
                     </div>
                 </div>
                 <div class="room-diagram">
-                    <!-- <div id="tablesz" class="tablesz">
-                        <input class="a" value="1">
-                        <input class="a" value="2">
-                        <img src="trapezoid.png" height="100%">
-                    </div> -->
                     <div id="tables" class="tables">
                         <div class="to-insert-before"></div>
                     </div>

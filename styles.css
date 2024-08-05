@@ -396,13 +396,15 @@ body {
 .trapezoid, .trapezoid-i, .cluster, .cluster-i {
     background-color: transparent;
     border: 1px solid transparent;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
 .seat {
     background-color: white;
     border: 1px solid black;
     border-radius: 50%;
-    height: 70%;
+    height: 30px;
     aspect-ratio: 1/1;
     font-weight: bold;
     text-align: center;
@@ -412,7 +414,17 @@ body {
     background-color: white;
     border: 1px solid black;
     border-radius: 50%;
-    height: 50%;
+    height: 30px;
+    aspect-ratio: 1/1;
+    font-weight: bold;
+    text-align: center;
+}
+
+.all-rounded-2 .seat {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 50%;
+    height: 30px;
     aspect-ratio: 1/1;
     font-weight: bold;
     text-align: center;
@@ -430,7 +442,7 @@ body {
     background-color: white;
     border: 1px solid black;
     border-radius: 50%;
-    height: 60%;
+    height: 30px;
     aspect-ratio: 1/1;
     font-weight: bold;
     text-align: center;

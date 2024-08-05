@@ -273,6 +273,7 @@ const half_rounded = [3, 10, 2];
 const all_rounded_2 = [4, 10, 2];
 const all_rounded_3 = [4, 10, 3];
 const rectangle = [3, 6, 1];
+const rectangle_2 = [3, 6, 2];
 const trapezoid = [3, 6, 1];
 const trapezoid_i = [3, 6, 1];
 const cluster = [3, 10, 3];
@@ -338,8 +339,8 @@ const room_01_02 = [
 const roomInputs = ["D1.03", "D1.04", "D2.03", "D2.04", "D3.03", "D3.04", "D4.01", "D4.01.b"];
 const rooms = [room_103, room_104, room_203, room_204, room_303, room_304, room_401, room_401_b];
 
-const tableNames = ["half-rounded", "all-rounded-2", "all-rounded-3", "rectangle", "trapezoid", "trapezoid-i", "cluster", "cluster-i"];
-const tables = [half_rounded, all_rounded_2, all_rounded_3, rectangle, trapezoid, trapezoid_i, cluster, cluster_i];
+const tableNames = ["half-rounded", "all-rounded-2", "all-rounded-3", "rectangle", "rectangle-2", "trapezoid", "trapezoid-i", "cluster", "cluster-i"];
+const tables = [half_rounded, all_rounded_2, all_rounded_3, rectangle, rectangle_2, trapezoid, trapezoid_i, cluster, cluster_i];
 
 let gridToggle = document.querySelector('#grid-toggle');
 let roomTables = [];
@@ -477,6 +478,7 @@ function confirmAndCreateTables() {
             roomTables = [];
             tableSeats = [];
             randomSequence = [];
+            seatsAssigned = false;
             createTables();
             console.log(roomTables.length);
         }
@@ -484,7 +486,109 @@ function confirmAndCreateTables() {
     }
 }
 
+function addTable() {
+    let tableToAdd = document.getElementById("table-input").value;
+    console.log(tableToAdd);
+    let newTable = document.createElement("div");
+    // add id to table
+    newTable.setAttribute("id", `table${roomTables.length + 1}`);
+    // add id to a list to manipulate
+    roomTables.push(`table${roomTables.length + 1}`);
+    // set position, "relative" ruin the layout
+    newTable.style.setProperty('position', "absolute");
+    // add class to table
+    newTable.classList.add("draggable");
+    newTable.classList.add(tableToAdd);
+    newTable.tabIndex = 0;
+    // make table draggable
+    $(newTable).draggable({
+        containment: ".tables",
+        snap: true,
+        cursor: "pointer",
+        zIndex: 100,
+        // prevent scrolling out of parent div
+        scroll: false,
+        snapTolerance: 10,
+        // update top and left to percentage once dragging stops
+        stop: function () {
+            var l = ( 100 * parseFloat($(this).position().left / parseFloat($(this).parent().width())) ) + "%" ;
+            var t = ( 100 * parseFloat($(this).position().top / parseFloat($(this).parent().height())) ) + "%" ;
+            $(this).css("left", l);
+            $(this).css("top", t);
+            $(this).click();
+        }
+    });
+
+    // disable snapping for weird table
+    if (tableToAdd=="trapezoid" || tableToAdd=="trapezoid-i" || tableToAdd=="cluster" || tableToAdd=="cluster-i") {
+        $(newTable).draggable({
+            snap: false
+            });
+    }
+
+    // set table size
+    newTable.style.setProperty('height', String((((100/30) * (tables[tableNames.indexOf(tableToAdd)][0]) +"%"))));
+    newTable.style.setProperty('width', String((((100/36) * (tables[tableNames.indexOf(tableToAdd)][1]) +"%"))));
+
+    // set table position
+    newTable.style.setProperty('left', "0%");
+    newTable.style.setProperty('top', "0%");
+
+    // finalize
+    let divToInsertBefore = document.querySelector(".to-insert-before");
+    let parent = document.querySelector(".tables");
+    parent.insertBefore(newTable, divToInsertBefore);
+
+    // set table seat
+    for (let j = 0; j < tables[tableNames.indexOf(tableToAdd)][2]; j++) {
+        let tableNumber = document.createElement("input");
+        tableNumber.setAttribute('value', "");
+        if (tableSeats.length==0) {
+            tableNumber.setAttribute('id', 'seat1');
+            tableSeats.push('seat1');
+        }
+        else {
+            tableNumber.setAttribute('id', `seat${parseInt(tableSeats[tableSeats.length-1].substr(4)) + 1}`);
+            tableSeats.push(`seat${parseInt(tableSeats[tableSeats.length-1].substr(4)) + 1}`);
+        }
+            
+        tableNumber.classList.add("seat");
+        newTable.appendChild(tableNumber);
+    }
+        
+    if (tableToAdd=="trapezoid") {
+        let newTableBg = document.createElement("img");
+        newTableBg.setAttribute("class", "bg-img");
+        newTableBg.setAttribute("src", "trapezoid.png");
+        newTableBg.setAttribute("height", "100%");
+        newTable.appendChild(newTableBg);
+    }
+    else if (tableToAdd=="trapezoid-i") {
+        let newTableBg = document.createElement("img");
+        newTableBg.setAttribute("class", "bg-img");
+        newTableBg.setAttribute("src", "trapezoid-i.png");
+        newTableBg.setAttribute("height", "100%");
+        newTable.appendChild(newTableBg);
+    }
+    else if (tableToAdd=="cluster") {
+        let newTableBg = document.createElement("img");
+        newTableBg.setAttribute("class", "bg-img");
+        newTableBg.setAttribute("src", "cluster.png");
+        newTableBg.setAttribute("height", "100%");
+        newTable.appendChild(newTableBg);
+    }
+    else if (tableToAdd=="cluster-i") {
+        let newTableBg = document.createElement("img");
+        newTableBg.setAttribute("class", "bg-img");
+        newTableBg.setAttribute("src", "cluster-i.png");
+        newTableBg.setAttribute("height", "100%");
+        newTable.appendChild(newTableBg);
+    }
+    
+}
+
 function clearTables() {
+    console.log(roomTables);
     if (confirm('Clear all tables?')) {
         for (let i = 0; i < roomTables.length; i++) {
             let tableToDelete = document.getElementById(roomTables[i]);
@@ -494,21 +598,21 @@ function clearTables() {
         tableSeats = [];
         randomSequence = [];
         seatsAssigned = false;
-        // console.log(roomTables.length);
+        console.log(roomTables.length);
     } else {}
 }
 
 let focusedElementId = "";
 document.body.addEventListener("click", () => {
     clickedElement = document.activeElement;
-    console.log(clickedElement);
+    // console.log(clickedElement);
     if (clickedElement.id.substr(0, 5)=="table") {
         focusedElementId = clickedElement.id;
     }
     else {
         focusedElementId = "";
     }
-    console.log(`Focus Id is ${focusedElementId}`)
+    // console.log(`Focus Id is ${focusedElementId}`)
 })
 
 function deleteTable() {
@@ -538,26 +642,34 @@ function shuffleSeats() {
     function randomAndAssignSeats() {
         randomSequence = []
         studentInput = document.querySelector('#student-input').value;
-        while (randomSequence.length < tableSeats.length) {
-            randomNumber = Math.floor(Math.random() * (tableSeats.length));
-            if (randomSequence.includes(randomNumber)) {}
-            else {
-                randomSequence.push(randomNumber);
+        if (studentInput!="" || studentInput!=0) {
+            if (studentInput>tableSeats.length) {
+                studentInput = tableSeats.length;
             }
-        }
-        console.log(randomSequence);
-        
-        for (i = 0; i < studentInput; i++) {
-            seatToSetValue = document.querySelector(`#${tableSeats[randomSequence[i]]}`);
-            seatToSetValue.value = i+1;
+
+            while (randomSequence.length < tableSeats.length) {
+                randomNumber = Math.floor(Math.random() * (tableSeats.length));
+                if (randomSequence.includes(randomNumber)) {}
+                else {
+                    randomSequence.push(randomNumber);
+                }
+            }
+            console.log(randomSequence);
+            
+            for (i = 0; i < studentInput; i++) {
+                seatToSetValue = document.querySelector(`#${tableSeats[randomSequence[i]]}`);
+                seatToSetValue.value = i+1;
+            }
+            seatsAssigned = true;
         }
     }
     // check if seats already assigned
     for (i = 0; i < tableSeats.length; i++) {
-        console.log(`tableSeat value is ${document.getElementById(tableSeats[i]).value}`);
         if (document.getElementById(tableSeats[i]).value != '') {
             seatsAssigned = true;
-            break;}
+            console.log(`tableSeat ${i+1} is assigned with ${document.getElementById(tableSeats[i]).value}`);
+            break;
+        }
     }
     
     if (seatsAssigned) {
@@ -571,10 +683,10 @@ function shuffleSeats() {
     else {
         randomAndAssignSeats();
     }
-    seatsAssigned = true;
 }
 
 function clearSeats() {
+    console.log(seatsAssigned);
     if (seatsAssigned) {
         if (confirm("Clear all seat numbers?")) {
             for (i = 0; i < tableSeats.length; i++) {
@@ -599,43 +711,3 @@ gridToggle.addEventListener("click", () => {
         $(".draggable").draggable("option", "grid", false);
     }
 });
-
-
-function addTrapezoid() {
-    let trapezoid = document.getElementById("trap");
-    let ctx = trapezoid.getContext("2d");
-    ctx.beginPath();
-
-    // Define a rectangle
-    ctx.moveTo(20,20);
-    ctx.lineTo(180,20);
-    ctx.lineTo(180,100);
-    ctx.lineTo(20,100);
-    ctx.lineTo(20,20);
-
-    // Define a triangle
-    ctx.moveTo(100,20);
-    ctx.lineTo(180,100);
-    ctx.lineTo(20,100);
-    ctx.lineTo(100,20);
-
-    ctx.strokeStyle = "red";
-    ctx.stroke();
-
-    $(trapezoid).draggable({
-        containment: ".tables",
-        snap: true,
-        cursor: "pointer",
-        // prevent scrolling out of parent div
-        scroll: false,
-        snapTolerance: 10,
-        // update top and left to percentage once dragging stops
-        stop: function () {
-            var l = ( 100 * parseFloat($(this).position().left / parseFloat($(this).parent().width())) ) + "%" ;
-            var t = ( 100 * parseFloat($(this).position().top / parseFloat($(this).parent().height())) ) + "%" ;
-            $(this).css("left", l);
-            $(this).css("top", t);
-            $(this).click();
-        }
-    });
-}
