@@ -1,3 +1,4 @@
+document.getElementById("defaultOpen").click();
 let timerStatus = "pending";
 const ppButton = document.querySelector("#pp-button");
 const resetButton = document.querySelector("#reset-button");
@@ -7,6 +8,47 @@ let currentTime = 0;
 let newCurrentTime = 0;
 let intervalId = '';
 let progressBar = document.querySelectorAll('.progress-bar');
+
+function openTab(evt, tabName) {
+    // Declare all variables
+    let i, tabcontent, tablinks;
+  
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+  
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+  
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+function toggleTimer() {
+    ribbonDisplay = document.getElementById('div-top').style.display;
+    if (ribbonDisplay=="flex" || ribbonDisplay=="") {
+        document.getElementById('div-top').style.display = "none";
+        document.querySelector('#toggle-timer').className = "fa-regular fa-eye"
+    }
+    else {
+        document.getElementById('div-top').style.display = "flex";
+        document.querySelector('#toggle-timer').className = "fa-regular fa-eye-slash"
+    }
+    
+    // console.log(document.getElementById("div-top").style.display);
+    // if (timerRibbon.style.display == "") {
+    //     timerRibbon.display = "none";
+    // }
+    // else {
+    //     timerRibbon.style.display = "flex";
+    // }
+}
 
 function getVar() {
     minuteInput = document.querySelector('#minute-input').value;
@@ -266,7 +308,36 @@ resetButton.addEventListener("click", () => {
 });
 
 
+// let resizer = document.querySelector(".resizer");
+// let sidebar = document.querySelector(".div-left");
 
+
+// function initResizerFn( resizer, sidebar ) {
+//    // track current mouse position in x var
+//    let x, w;
+//    function rs_mousedownHandler( e ) {
+//       x = e.clientX;
+//       sbWidth = window.getComputedStyle( sidebar ).width;
+//       w = parseInt( sbWidth, 10 );
+
+//       document.addEventListener("mousemove", rs_mousemoveHandler);
+//       document.addEventListener("mouseup", rs_mouseupHandler);
+//    }
+//    function rs_mousemoveHandler( e ) {
+//       var dx = e.clientX - x;
+//       var cw = w + dx; // complete width     
+//       if ( cw < 700 ) {
+//          sidebar.style.width = `${ cw }px`;
+//       }
+//    }
+//    function rs_mouseupHandler() {
+//       // remove event mousemove && mouseup
+//       document.removeEventListener("mouseup", rs_mouseupHandler);
+//       document.removeEventListener("mousemove", rs_mousemoveHandler);
+//    }
+//    resizer.addEventListener("mousedown", rs_mousedownHandler);
+// }
+// initResizerFn( resizer, sidebar );
 
 // table sizes [h, w, seats]
 const half_rounded = [3, 10, 2];
@@ -443,6 +514,7 @@ function createTables() {
             newTableBg.setAttribute("class", "bg-img");
             newTableBg.setAttribute("src", "trapezoid.png");
             newTableBg.setAttribute("height", "100%");
+            newTableBg.setAttribute("width", "100%");
             newTable.appendChild(newTableBg);
         }
         else if (room[i][1]=="trapezoid-i") {
@@ -450,6 +522,7 @@ function createTables() {
             newTableBg.setAttribute("class", "bg-img");
             newTableBg.setAttribute("src", "trapezoid-i.png");
             newTableBg.setAttribute("height", "100%");
+            newTableBg.setAttribute("width", "100%");
             newTable.appendChild(newTableBg);
         }
         else if (room[i][1]=="cluster") {
@@ -457,6 +530,7 @@ function createTables() {
             newTableBg.setAttribute("class", "bg-img");
             newTableBg.setAttribute("src", "cluster.png");
             newTableBg.setAttribute("height", "100%");
+            newTableBg.setAttribute("width", "100%");
             newTable.appendChild(newTableBg);
         }
         else if (room[i][1]=="cluster-i") {
@@ -464,6 +538,7 @@ function createTables() {
             newTableBg.setAttribute("class", "bg-img");
             newTableBg.setAttribute("src", "cluster-i.png");
             newTableBg.setAttribute("height", "100%");
+            newTableBg.setAttribute("width", "100%");
             newTable.appendChild(newTableBg);
         }
         
