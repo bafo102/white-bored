@@ -419,7 +419,7 @@ button#doc-tab.active {
 
 .tables {
     position: relative;
-    border: 1px solid green;
+    /* border: 1px solid green; */
     height: 70%;
     width: 85%;
     z-index: 2;
