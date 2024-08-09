@@ -307,38 +307,6 @@ resetButton.addEventListener("click", () => {
       } else {}
 });
 
-
-// let resizer = document.querySelector(".resizer");
-// let sidebar = document.querySelector(".div-left");
-
-
-// function initResizerFn( resizer, sidebar ) {
-//    // track current mouse position in x var
-//    let x, w;
-//    function rs_mousedownHandler( e ) {
-//       x = e.clientX;
-//       sbWidth = window.getComputedStyle( sidebar ).width;
-//       w = parseInt( sbWidth, 10 );
-
-//       document.addEventListener("mousemove", rs_mousemoveHandler);
-//       document.addEventListener("mouseup", rs_mouseupHandler);
-//    }
-//    function rs_mousemoveHandler( e ) {
-//       var dx = e.clientX - x;
-//       var cw = w + dx; // complete width     
-//       if ( cw < 700 ) {
-//          sidebar.style.width = `${ cw }px`;
-//       }
-//    }
-//    function rs_mouseupHandler() {
-//       // remove event mousemove && mouseup
-//       document.removeEventListener("mouseup", rs_mouseupHandler);
-//       document.removeEventListener("mousemove", rs_mousemoveHandler);
-//    }
-//    resizer.addEventListener("mousedown", rs_mousedownHandler);
-// }
-// initResizerFn( resizer, sidebar );
-
 // table sizes [h, w, seats]
 const half_rounded = [3, 10, 2];
 const all_rounded_2 = [4, 10, 2];
@@ -416,6 +384,7 @@ const room_01_02 = [
     [[21,4], "half-rounded"],[[21,22], "half-rounded"],
     [[26,4], "half-rounded"],[[26,22], "half-rounded"]
 ];
+
 
 const roomInputs = ["D1.03", "D1.04", "D2.03", "D2.04", "D3.03", "D3.04", "D4.01", "D4.01.b"];
 const rooms = [room_103, room_104, room_203, room_204, room_303, room_304, room_401, room_401_b];
@@ -512,6 +481,7 @@ function createTables() {
         if (room[i][1]=="trapezoid") {
             let newTableBg = document.createElement("img");
             newTableBg.setAttribute("class", "bg-img");
+            newTableBg.setAttribute("id", `bg-img${i+1}`);
             newTableBg.setAttribute("src", "trapezoid.png");
             newTableBg.setAttribute("height", "100%");
             newTableBg.setAttribute("width", "100%");
@@ -520,6 +490,7 @@ function createTables() {
         else if (room[i][1]=="trapezoid-i") {
             let newTableBg = document.createElement("img");
             newTableBg.setAttribute("class", "bg-img");
+            newTableBg.setAttribute("id", `bg-img${i+1}`);
             newTableBg.setAttribute("src", "trapezoid-i.png");
             newTableBg.setAttribute("height", "100%");
             newTableBg.setAttribute("width", "100%");
@@ -528,6 +499,7 @@ function createTables() {
         else if (room[i][1]=="cluster") {
             let newTableBg = document.createElement("img");
             newTableBg.setAttribute("class", "bg-img");
+            newTableBg.setAttribute("id", `bg-img${i+1}`);
             newTableBg.setAttribute("src", "cluster.png");
             newTableBg.setAttribute("height", "100%");
             newTableBg.setAttribute("width", "100%");
@@ -536,6 +508,7 @@ function createTables() {
         else if (room[i][1]=="cluster-i") {
             let newTableBg = document.createElement("img");
             newTableBg.setAttribute("class", "bg-img");
+            newTableBg.setAttribute("id", `bg-img${i+1}`);
             newTableBg.setAttribute("src", "cluster-i.png");
             newTableBg.setAttribute("height", "100%");
             newTableBg.setAttribute("width", "100%");
@@ -566,7 +539,6 @@ function confirmAndCreateTables() {
             randomSequence = [];
             seatsAssigned = false;
             createTables();
-            console.log(roomTables.length);
         }
         else {}
     }
@@ -576,9 +548,25 @@ function addTable() {
     let tableToAdd = document.getElementById("table-input").value;
     let newTable = document.createElement("div");
     // add id to table
-    newTable.setAttribute("id", `table${roomTables.length + 1}`);
+    let newTableId;
+    if (roomTables.length==0) {
+        newTableId = 'table1';
+    }
+
+    else {
+        lastTableIdNumber = roomTables[roomTables.length-1].slice(5);
+        increment = 1;
+        newTableId = `table${parseInt(lastTableIdNumber) + increment}`;
+        while (roomTables.includes(newTableId)) {
+            increment++;
+        }
+    }
+    
+    
+    // newTable.setAttribute("id", `table${roomTables.length + 1}`);
+    newTable.setAttribute("id", `${newTableId}`);
     // add id to a list to manipulate
-    roomTables.push(`table${roomTables.length + 1}`);
+    roomTables.push(newTableId);
     // set position, "relative" ruin the layout
     newTable.style.setProperty('position', "absolute");
     // add class to table
@@ -644,6 +632,7 @@ function addTable() {
     if (tableToAdd=="trapezoid") {
         let newTableBg = document.createElement("img");
         newTableBg.setAttribute("class", "bg-img");
+        newTableBg.setAttribute("id", `bg-img${newTableId.slice(5)}`);
         newTableBg.setAttribute("src", "trapezoid.png");
         newTableBg.setAttribute("height", "100%");
         newTable.appendChild(newTableBg);
@@ -651,6 +640,7 @@ function addTable() {
     else if (tableToAdd=="trapezoid-i") {
         let newTableBg = document.createElement("img");
         newTableBg.setAttribute("class", "bg-img");
+        newTableBg.setAttribute("id", `bg-img${newTableId.slice(5)}`);
         newTableBg.setAttribute("src", "trapezoid-i.png");
         newTableBg.setAttribute("height", "100%");
         newTable.appendChild(newTableBg);
@@ -658,6 +648,7 @@ function addTable() {
     else if (tableToAdd=="cluster") {
         let newTableBg = document.createElement("img");
         newTableBg.setAttribute("class", "bg-img");
+        newTableBg.setAttribute("id", `bg-img${newTableId.slice(5)}`);
         newTableBg.setAttribute("src", "cluster.png");
         newTableBg.setAttribute("height", "100%");
         newTable.appendChild(newTableBg);
@@ -665,6 +656,7 @@ function addTable() {
     else if (tableToAdd=="cluster-i") {
         let newTableBg = document.createElement("img");
         newTableBg.setAttribute("class", "bg-img");
+        newTableBg.setAttribute("id", `bg-img${newTableId.slice(5)}`);
         newTableBg.setAttribute("src", "cluster-i.png");
         newTableBg.setAttribute("height", "100%");
         newTable.appendChild(newTableBg);
@@ -708,7 +700,7 @@ function deleteTable() {
         // remove table id from list
         let focusedTable = document.getElementById(focusedElementId);
         roomTables.splice(roomTables.indexOf(focusedElementId),1);
-        console.log(roomTables);
+        console.log(`Current tables are ${roomTables}`);
         // delete table and seats within
         focusedTable.remove();
         // reset focus
@@ -790,9 +782,6 @@ function clearSeats() {
 
 
 gridToggle.addEventListener("click", () => {
-    console.log(gridCellWidth);
-    console.log(gridCellWidth);
-    console.log(gridCellHeight);
     if (gridToggle.checked) {
         grid.style.visibility = "visible";
         $( ".draggable" ).draggable({ grid: [ gridCellWidth, gridCellHeight ] });
@@ -807,3 +796,103 @@ function reportRoom() {
     console.log(`Current tables are ${roomTables}`);
     console.log(`Current seats are ${tableSeats}`);
 }
+
+
+let rotateToggle = document.querySelector('#rotate-toggle');
+rotateToggle.addEventListener("change", () => {
+        rotateDiagram();
+})
+
+function updateTablePosition() {
+    for (i=0 ; i < roomTables.length; i++) {
+        currentTable = document.getElementById(roomTables[i]);
+        l = ( 100 * parseFloat($(currentTable).position().left / parseFloat($(currentTable).parent().width())) ) + "%" ;
+        t = ( 100 * parseFloat($(currentTable).position().top / parseFloat($(currentTable).parent().height())) ) + "%" ;
+        $(currentTable).css("left", l);
+        $(currentTable).css("top", t);
+    }
+    console.log("table updated after window risizing");
+    gridDimensions = document.querySelector('#grid').getBoundingClientRect();
+    console.log(`current grid is top: ${gridDimensions.top} and left: ${gridDimensions.left}`)
+}
+
+function rotateDiagram() {
+    for (i=0 ; i < roomTables.length; i++) {
+        currentTable = document.getElementById(roomTables[i]);
+        
+        // get current table positions and sizes
+        currentTop = document.getElementById(roomTables[i]).getBoundingClientRect().top;
+        currentLeft = document.getElementById(roomTables[i]).getBoundingClientRect().left;
+        currentWidth = document.getElementById(roomTables[i]).getBoundingClientRect().width;
+        currentHeight = document.getElementById(roomTables[i]).getBoundingClientRect().height;
+        
+        // get current grid sizes
+        gridDimensions = document.querySelector('#grid').getBoundingClientRect();
+        newTop = gridDimensions.height - (currentTop - gridDimensions.top) - currentHeight;
+        newLeft = gridDimensions.width - (currentLeft - gridDimensions.left) - currentWidth;
+
+        // set table position
+        currentTable.style.setProperty('top', String(newTop + "px"));
+        currentTable.style.setProperty('left', String(newLeft + "px"));
+
+        // turn size to %
+        l = ( 100 * parseFloat($(currentTable).position().left / parseFloat($(currentTable).parent().width())) ) + "%" ;
+        t = ( 100 * parseFloat($(currentTable).position().top / parseFloat($(currentTable).parent().height())) ) + "%" ;
+        $(currentTable).css("left", l);
+        $(currentTable).css("top", t);
+
+        // update background and shape for asymmetrical tables
+        // half-rounded
+        if (Array.from(currentTable.classList).includes("half-rounded")) {
+            currentTable.classList.remove("half-rounded");
+            currentTable.classList.add("half-rounded-i");
+        }
+        else if (Array.from(currentTable.classList).includes("half-rounded-i")) {
+            currentTable.classList.remove("half-rounded-i");
+            currentTable.classList.add("half-rounded");
+        }
+        
+        
+        // trapezoid
+        if (Array.from(currentTable.classList).includes("trapezoid")) {
+            currentTable.classList.remove("trapezoid");
+            currentTable.classList.add("trapezoid-i");
+            document.getElementById(`bg-img${roomTables[i].slice(5)}`).src = "trapezoid-i.png";
+        }
+
+        else if (Array.from(currentTable.classList).includes("trapezoid-i")) {
+            currentTable.classList.remove("trapezoid-i");
+            currentTable.classList.add("trapezoid");
+            document.getElementById(`bg-img${roomTables[i].slice(5)}`).src = "trapezoid.png";
+        }
+
+        // cluster
+        if (Array.from(currentTable.classList).includes("cluster")) {
+            currentTable.classList.add("cluster-i");
+            currentTable.classList.remove("cluster");
+            document.getElementById(`bg-img${roomTables[i].slice(5)}`).src = "cluster-i.png";
+        }
+
+        else if (Array.from(currentTable.classList).includes("cluster-i")) {
+            currentTable.classList.add("cluster");
+            currentTable.classList.remove("cluster-i");
+            document.getElementById(`bg-img${roomTables[i].slice(5)}`).src = "cluster.png";
+        }
+
+        // update seat order
+        if (currentTable.style.flexDirection == "row" || currentTable.style.flexDirection == "") {
+            currentTable.style.flexDirection = "row-reverse";
+        }
+        else if (currentTable.style.flexDirection == "row-reverse") {
+            currentTable.style.flexDirection = "row";
+        }
+        
+    }
+    console.log(`Tables rotated`)
+    reportRoom();
+}
+
+
+
+
+
