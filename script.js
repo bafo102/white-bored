@@ -40,14 +40,6 @@ function toggleTimer() {
         document.getElementById('div-top').style.display = "flex";
         document.querySelector('#toggle-timer').className = "fa-regular fa-eye-slash"
     }
-    
-    // console.log(document.getElementById("div-top").style.display);
-    // if (timerRibbon.style.display == "") {
-    //     timerRibbon.display = "none";
-    // }
-    // else {
-    //     timerRibbon.style.display = "flex";
-    // }
 }
 
 function getVar() {
@@ -320,12 +312,11 @@ const cluster_i = [3, 10, 3];
 
 // table coordinates [t, l, name]
 const room_103 = [
-    [[2,2],"trapezoid"],[[2,13],"half-rounded"],[[2,28],"trapezoid"],
-    [[8,2],"trapezoid"],[[8,13],"cluster"],[[8,28],"trapezoid"],
-    [[14,2],"trapezoid"],[[14,13],"cluster"],[[14,28],"trapezoid"],
-    [[20,2],"trapezoid"],[[20,13],"cluster"],[[20,28],"trapezoid"],
-    [[26,15],"trapezoid"]
-
+    [[1,6],"trapezoid-i"],[[1,10.5],"trapezoid"],
+    [[7,1.5],"trapezoid-i"],[[7,6],"trapezoid"],[[7,12],"half-rounded"],[[7,24],"trapezoid"],[[7,28.5],"trapezoid-i"],
+    [[13,1.5],"trapezoid"],[[13,6],"trapezoid-i"],[[13,10.5],"trapezoid"],[[13,24],"trapezoid"],[[13,28.5],"trapezoid-i"],
+    [[19,1.5],"trapezoid"],[[19,6],"trapezoid-i"],[[19,10.5],"trapezoid"],[[19,24],"trapezoid"],[[19,28.5],"trapezoid-i"],
+    [[25,6],"trapezoid"],[[25,24],"trapezoid-i"],[[25,28.5],"trapezoid"]
 ];
 const room_104 = [
     [[1,0],"rectangle"],[[1,6],"rectangle"],[[1,30],"rectangle"],
@@ -635,6 +626,7 @@ function addTable() {
         newTableBg.setAttribute("id", `bg-img${newTableId.slice(5)}`);
         newTableBg.setAttribute("src", "trapezoid.png");
         newTableBg.setAttribute("height", "100%");
+        newTableBg.setAttribute("width", "100%");
         newTable.appendChild(newTableBg);
     }
     else if (tableToAdd=="trapezoid-i") {
@@ -643,6 +635,7 @@ function addTable() {
         newTableBg.setAttribute("id", `bg-img${newTableId.slice(5)}`);
         newTableBg.setAttribute("src", "trapezoid-i.png");
         newTableBg.setAttribute("height", "100%");
+        newTableBg.setAttribute("width", "100%");
         newTable.appendChild(newTableBg);
     }
     else if (tableToAdd=="cluster") {
@@ -651,6 +644,7 @@ function addTable() {
         newTableBg.setAttribute("id", `bg-img${newTableId.slice(5)}`);
         newTableBg.setAttribute("src", "cluster.png");
         newTableBg.setAttribute("height", "100%");
+        newTableBg.setAttribute("width", "100%");
         newTable.appendChild(newTableBg);
     }
     else if (tableToAdd=="cluster-i") {
@@ -659,6 +653,7 @@ function addTable() {
         newTableBg.setAttribute("id", `bg-img${newTableId.slice(5)}`);
         newTableBg.setAttribute("src", "cluster-i.png");
         newTableBg.setAttribute("height", "100%");
+        newTableBg.setAttribute("width", "100%");
         newTable.appendChild(newTableBg);
     }
     console.log(`Table ${tableToAdd} added`)
@@ -800,21 +795,8 @@ function reportRoom() {
 
 let rotateToggle = document.querySelector('#rotate-toggle');
 rotateToggle.addEventListener("change", () => {
-        rotateDiagram();
+    rotateDiagram();
 })
-
-function updateTablePosition() {
-    for (i=0 ; i < roomTables.length; i++) {
-        currentTable = document.getElementById(roomTables[i]);
-        l = ( 100 * parseFloat($(currentTable).position().left / parseFloat($(currentTable).parent().width())) ) + "%" ;
-        t = ( 100 * parseFloat($(currentTable).position().top / parseFloat($(currentTable).parent().height())) ) + "%" ;
-        $(currentTable).css("left", l);
-        $(currentTable).css("top", t);
-    }
-    console.log("table updated after window risizing");
-    gridDimensions = document.querySelector('#grid').getBoundingClientRect();
-    console.log(`current grid is top: ${gridDimensions.top} and left: ${gridDimensions.left}`)
-}
 
 function rotateDiagram() {
     for (i=0 ; i < roomTables.length; i++) {
@@ -870,13 +852,11 @@ function rotateDiagram() {
         if (Array.from(currentTable.classList).includes("cluster")) {
             currentTable.classList.add("cluster-i");
             currentTable.classList.remove("cluster");
-            document.getElementById(`bg-img${roomTables[i].slice(5)}`).src = "cluster-i.png";
         }
 
         else if (Array.from(currentTable.classList).includes("cluster-i")) {
             currentTable.classList.add("cluster");
             currentTable.classList.remove("cluster-i");
-            document.getElementById(`bg-img${roomTables[i].slice(5)}`).src = "cluster.png";
         }
 
         // update seat order
@@ -888,6 +868,17 @@ function rotateDiagram() {
         }
         
     }
+
+    screenDisplay = document.querySelector('.screen').style.display;
+    if (screenDisplay=="block" || screenDisplay=="") {
+        console.log('screen display is block')
+        document.querySelector('.screen').style.display = "none";
+        document.querySelector('.screen-rotated').style.display = "block";
+        }
+    else {
+        document.querySelector('.screen').style.display = "block";
+        document.querySelector('.screen-rotated').style.display = "none";
+        }
     console.log(`Tables rotated`)
     reportRoom();
 }

@@ -6,7 +6,7 @@
     <title>White Bored</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body onresize="updateTablePosition()">
+<body>
     <div id="tabs">
         <button id="defaultOpen" class="tablinks" onclick="openTab(event, 'main')">Main</button>
         <button id="doc-tab" class="tablinks" onclick="openTab(event, 'doc')">Doc</button>
@@ -119,14 +119,14 @@
                         
                     </div>
                 </div>
+                <div class="screen">TV Screen / White board</div>
                 <div class="room-diagram">
                     <div id="tables" class="tables">
-                        <!-- <div id=center class="center"></div> -->
                         <div class="to-insert-before"></div>
                     </div>
-                    <div id="grid" class="grid ui-widget-header">
-                    </div>
+                    <div id="grid" class="grid ui-widget-header"></div>
                 </div>
+                <div class="screen-rotated">TV Screen / White board</div>
             </div>
         </div>
     </div>
@@ -134,15 +134,9 @@
         <iframe src="https://docs.google.com/document/d/1cRMfJNIbz-jJAbK1dsOgdb9IX-YymB5wlHIn_cXPr4w/edit" frameborder="0" marginheight="0" marginwidth></iframe>        
     </div>
     <div id="extra" class="tabcontent">Don't know what to put here yet</div>
-
     <script src="script.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
     <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
-    <script>
-    $( function() {
-        $( ".ui-widget-header" ).draggable({ snap: ".ui-widget-header" });
-    } );
-    </script>
 </body>
 </html>
