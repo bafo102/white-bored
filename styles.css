@@ -514,7 +514,7 @@ button#doc-tab.active {
     background-color: white;
     border: 1px solid black;
     border-radius: 50%;
-    height: 80%;
+    max-height: 80%;
     aspect-ratio: 1/1;
     font-weight: bold;
     font-size: 3vh;
@@ -525,7 +525,7 @@ button#doc-tab.active {
     background-color: white;
     border: 1px solid black;
     border-radius: 50%;
-    height: 70%;
+    max-height: 70%;
     aspect-ratio: 1/1;
     font-weight: bold;
     text-align: center;
@@ -535,7 +535,7 @@ button#doc-tab.active {
     background-color: white;
     border: 1px solid black;
     border-radius: 50%;
-    height: 70%;
+    max-height: 70%;
     aspect-ratio: 1/1;
     font-weight: bold;
     text-align: center;
@@ -552,7 +552,7 @@ button#doc-tab.active {
 .cluster-i .seat {
     background-color: white;
     border: 1px solid black;
-    height: 80%;
+    max-height: 80%;
     aspect-ratio: 1/1;
     font-weight: bold;
     text-align: center;
