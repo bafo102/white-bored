@@ -34,11 +34,11 @@ function toggleTimer() {
     ribbonDisplay = document.getElementById('div-top').style.display;
     if (ribbonDisplay=="flex" || ribbonDisplay=="") {
         document.getElementById('div-top').style.display = "none";
-        document.querySelector('#toggle-timer').className = "fa-regular fa-eye"
+        document.querySelector('#toggle-timer').className = "fa-solid fa-hourglass hidden"
     }
     else {
         document.getElementById('div-top').style.display = "flex";
-        document.querySelector('#toggle-timer').className = "fa-regular fa-eye-slash"
+        document.querySelector('#toggle-timer').className = "fa-solid fa-hourglass"
     }
 }
 
@@ -376,9 +376,10 @@ const room_01_02 = [
     [[26,4], "half-rounded"],[[26,22], "half-rounded"]
 ];
 
+let room_custom;
 
-const roomInputs = ["D1.03", "D1.04", "D2.03", "D2.04", "D3.03", "D3.04", "D4.01", "D4.01.b"];
-const rooms = [room_103, room_104, room_203, room_204, room_303, room_304, room_401, room_401_b];
+const roomInputs = ["Custom", "D1.03", "D1.04", "D2.03", "D2.04", "D3.03", "D3.04", "D4.01", "D4.01.b"];
+const rooms = [room_custom, room_103, room_104, room_203, room_204, room_303, room_304, room_401, room_401_b];
 
 const tableNames = ["half-rounded", "all-rounded-2", "all-rounded-3", "rectangle", "rectangle-2", "trapezoid", "trapezoid-i", "cluster", "cluster-i"];
 const tables = [half_rounded, all_rounded_2, all_rounded_3, rectangle, rectangle_2, trapezoid, trapezoid_i, cluster, cluster_i];
@@ -394,7 +395,13 @@ let gridCellWidth = gridDimensions.width/36;
 function createTables() {
     // identify room name
     let roomInput = document.querySelector('#room-input').value;
-    if (roomInput=="D1.02" || roomInput=="D2.01" || roomInput=="D2.02" || roomInput=="D3.01" || roomInput=="D3.02") {
+    if (roomInput == "Custom") {
+        customCodeForRoom = prompt('Paste your code here:');
+        // turn string into array
+        room_custom = JSON.parse(`${customCodeForRoom}`);
+        room = room_custom;
+    }
+    else if (roomInput=="D1.02" || roomInput=="D2.01" || roomInput=="D2.02" || roomInput=="D3.01" || roomInput=="D3.02") {
         room = room_01_02;
     }
     else {
@@ -473,7 +480,7 @@ function createTables() {
             let newTableBg = document.createElement("img");
             newTableBg.setAttribute("class", "bg-img");
             newTableBg.setAttribute("id", `bg-img${i+1}`);
-            newTableBg.setAttribute("src", "trapezoid.png");
+            newTableBg.setAttribute("src", "tables/trapezoid.png");
             newTableBg.setAttribute("height", "100%");
             newTableBg.setAttribute("width", "100%");
             newTable.appendChild(newTableBg);
@@ -482,7 +489,7 @@ function createTables() {
             let newTableBg = document.createElement("img");
             newTableBg.setAttribute("class", "bg-img");
             newTableBg.setAttribute("id", `bg-img${i+1}`);
-            newTableBg.setAttribute("src", "trapezoid-i.png");
+            newTableBg.setAttribute("src", "tables/trapezoid-i.png");
             newTableBg.setAttribute("height", "100%");
             newTableBg.setAttribute("width", "100%");
             newTable.appendChild(newTableBg);
@@ -491,7 +498,7 @@ function createTables() {
             let newTableBg = document.createElement("img");
             newTableBg.setAttribute("class", "bg-img");
             newTableBg.setAttribute("id", `bg-img${i+1}`);
-            newTableBg.setAttribute("src", "cluster.png");
+            newTableBg.setAttribute("src", "tables/cluster.png");
             newTableBg.setAttribute("height", "100%");
             newTableBg.setAttribute("width", "100%");
             newTable.appendChild(newTableBg);
@@ -500,7 +507,7 @@ function createTables() {
             let newTableBg = document.createElement("img");
             newTableBg.setAttribute("class", "bg-img");
             newTableBg.setAttribute("id", `bg-img${i+1}`);
-            newTableBg.setAttribute("src", "cluster-i.png");
+            newTableBg.setAttribute("src", "tables/cluster-i.png");
             newTableBg.setAttribute("height", "100%");
             newTableBg.setAttribute("width", "100%");
             newTable.appendChild(newTableBg);
@@ -511,6 +518,37 @@ function createTables() {
     reportRoom();
 }
 
+let tableCodes = [];
+
+function getTableCode() {
+    tableCodes = [];
+    for (i=0 ; i < roomTables.length; i++) {
+        // [t, l, name]
+        tableToGetCode = document.getElementById(roomTables[i]);
+        tableTop = tableToGetCode.style.top.slice(0, -1);
+        tableTopCode = Number(tableTop) / (100/30);
+        tableLeft = tableToGetCode.style.left.slice(0, -1);
+        tableLeftCode = Number(tableLeft) / (100/36);
+
+        tableNameList = tableToGetCode.classList;
+        let tableName;
+        for (z=0 ; z < tableNameList.length; z++) {
+            if (tableNames.includes(tableNameList[z])) {
+                tableName = tableNameList[z];
+                break;
+            };
+        };
+
+        tableCode = [[tableTopCode, tableLeftCode], tableName];
+        tableCodes.push(tableCode);
+    }
+    console.log(tableCodes);
+    tableCodeString = JSON.stringify(tableCodes);
+    
+    // Use the Clipboard API to copy the text
+    navigator.clipboard.writeText(tableCodeString);
+    alert(`Codes copied: ${tableCodeString}`);
+}
 
 function confirmAndCreateTables() {
     // if no tables
@@ -624,7 +662,7 @@ function addTable() {
         let newTableBg = document.createElement("img");
         newTableBg.setAttribute("class", "bg-img");
         newTableBg.setAttribute("id", `bg-img${newTableId.slice(5)}`);
-        newTableBg.setAttribute("src", "trapezoid.png");
+        newTableBg.setAttribute("src", "tables/trapezoid.png");
         newTableBg.setAttribute("height", "100%");
         newTableBg.setAttribute("width", "100%");
         newTable.appendChild(newTableBg);
@@ -633,7 +671,7 @@ function addTable() {
         let newTableBg = document.createElement("img");
         newTableBg.setAttribute("class", "bg-img");
         newTableBg.setAttribute("id", `bg-img${newTableId.slice(5)}`);
-        newTableBg.setAttribute("src", "trapezoid-i.png");
+        newTableBg.setAttribute("src", "tables/trapezoid-i.png");
         newTableBg.setAttribute("height", "100%");
         newTableBg.setAttribute("width", "100%");
         newTable.appendChild(newTableBg);
@@ -642,7 +680,7 @@ function addTable() {
         let newTableBg = document.createElement("img");
         newTableBg.setAttribute("class", "bg-img");
         newTableBg.setAttribute("id", `bg-img${newTableId.slice(5)}`);
-        newTableBg.setAttribute("src", "cluster.png");
+        newTableBg.setAttribute("src", "tables/cluster.png");
         newTableBg.setAttribute("height", "100%");
         newTableBg.setAttribute("width", "100%");
         newTable.appendChild(newTableBg);
@@ -651,7 +689,7 @@ function addTable() {
         let newTableBg = document.createElement("img");
         newTableBg.setAttribute("class", "bg-img");
         newTableBg.setAttribute("id", `bg-img${newTableId.slice(5)}`);
-        newTableBg.setAttribute("src", "cluster-i.png");
+        newTableBg.setAttribute("src", "tables/cluster-i.png");
         newTableBg.setAttribute("height", "100%");
         newTableBg.setAttribute("width", "100%");
         newTable.appendChild(newTableBg);
@@ -790,6 +828,7 @@ gridToggle.addEventListener("click", () => {
 function reportRoom() {
     console.log(`Current tables are ${roomTables}`);
     console.log(`Current seats are ${tableSeats}`);
+    // console.log(`Current table codes are ${tableCodes}`);
 }
 
 
@@ -839,13 +878,13 @@ function rotateDiagram() {
         if (Array.from(currentTable.classList).includes("trapezoid")) {
             currentTable.classList.remove("trapezoid");
             currentTable.classList.add("trapezoid-i");
-            document.getElementById(`bg-img${roomTables[i].slice(5)}`).src = "trapezoid-i.png";
+            document.getElementById(`bg-img${roomTables[i].slice(5)}`).src = "tables/trapezoid-i.png";
         }
 
         else if (Array.from(currentTable.classList).includes("trapezoid-i")) {
             currentTable.classList.remove("trapezoid-i");
             currentTable.classList.add("trapezoid");
-            document.getElementById(`bg-img${roomTables[i].slice(5)}`).src = "trapezoid.png";
+            document.getElementById(`bg-img${roomTables[i].slice(5)}`).src = "tables/trapezoid.png";
         }
 
         // cluster
@@ -882,8 +921,3 @@ function rotateDiagram() {
     console.log(`Tables rotated`)
     reportRoom();
 }
-
-
-
-
-
