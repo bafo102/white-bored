@@ -42,6 +42,46 @@ function toggleTimer() {
     }
 }
 
+function toggleDoc() {
+    docDivDisplay = document.getElementById('div-doc').style.display;
+    if (docDivDisplay=="") {
+        // hide doc
+        document.getElementById('div-doc').style.display = "none";
+        // show diagram
+        document.getElementById('div-diagram').style.display = "";
+        // update toggle
+        document.querySelector('#toggle-doc').className = "fa-solid fa-file-word hidden"
+    }
+    else {
+        // show doc
+        document.getElementById('div-doc').style.display = "";
+        // hide diagram
+        document.getElementById('div-diagram').style.display = "none";
+        // update toggle
+        document.querySelector('#toggle-doc').className = "fa-solid fa-file-word"
+    }
+}
+
+function toggleInfo() {
+    infoDivDisplay = document.getElementById('div-info').style.display;
+    if (infoDivDisplay=="") {
+        // hide info
+        document.getElementById('div-info').style.display = "none";
+        // show editor
+        document.getElementById('div-editor').style.display = "";
+        // update toggle
+        document.querySelector('#toggle-info').className = "fa-solid fa-circle-info hidden"
+    }
+    else {
+        // show info
+        document.getElementById('div-info').style.display = "";
+        // hide editor
+        document.getElementById('div-editor').style.display = "none";
+        // update toggle
+        document.querySelector('#toggle-info').className = "fa-solid fa-circle-info"
+    }
+}
+
 function getVar() {
     minuteInput = document.querySelector('#minute-input').value;
     durationInMili = minuteInput * 60 * 1000;
@@ -921,3 +961,49 @@ function rotateDiagram() {
     console.log(`Tables rotated`)
     reportRoom();
 }
+
+
+// const resizer = document.getElementById('resizer');
+// const leftSection = document.getElementById('div-left');
+// const rightSection = document.getElementById('div-right');
+
+// let isDragging = false;
+
+// resizer.addEventListener('mousedown', (e) => {
+//     isDragging = true;
+//     document.addEventListener('mousemove', handleMouseMove);
+//     document.addEventListener('mouseup', handleMouseUp);
+// });
+
+// function handleMouseMove(e) {
+//     if (isDragging) {
+//         const containerRect = resizer.parentNode.getBoundingClientRect();
+//         const leftWidth = e.clientX - containerRect.left;
+//         const rightWidth = containerRect.width - leftWidth - resizer.offsetWidth;
+
+//         if (leftWidth >= 50 && rightWidth >= 50) {
+//             leftSection.style.width = leftWidth + 'px';
+//             rightSection.style.width = rightWidth + 'px';
+//             resizer.style.left = leftWidth + 'px';
+//         }
+//     }
+// }
+
+// function handleMouseUp() {
+//     isDragging = false;
+//     document.removeEventListener('mousemove', handleMouseMove);
+//     document.removeEventListener('mouseup', handleMouseUp);
+// }
+
+// // Initial position of the resizer
+// resizer.style.left = leftSection.offsetWidth + 'px';
+
+// exam type 
+// subject
+// date start duration
+// closed or open
+// wifi
+// exam password
+// 
+// 
+// //

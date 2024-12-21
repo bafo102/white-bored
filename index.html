@@ -11,10 +11,13 @@
         <button id="defaultOpen" class="tablinks" onclick="openTab(event, 'main')">Main</button>
         <button id="doc-tab" class="tablinks" onclick="openTab(event, 'doc')">Doc</button>
         <button id="sheet-tab" class="tablinks" onclick="openTab(event, 'sheet')">Sheet</button>
-        
+    </div>
+    <div id="toggle-panel">
+        <button id="toggle-timer" class="fa-solid fa-hourglass-half" onclick="toggleTimer();"></button>
+        <button id="toggle-doc" class="fa-solid fa-file-word hidden" onclick="toggleDoc();"></button>
+        <button id="toggle-info" class="fa-solid fa-circle-info hidden" onclick="toggleInfo();"></button>
     </div>
     <div id="main" class="tabcontent">
-        <button id="toggle-timer" class="fa-solid fa-hourglass icon" onclick="toggleTimer();"></button>
         <div id="div-top" class="div-top">
             <div class="time-input-container">
                 <div class="time-input-top">
@@ -57,14 +60,17 @@
             </div>
         </div>
         <div class="div-bottom">
-            <div id="div-left" class="div-left">
+            <div id="div-editor">
                 <div class="editor-container">
                 <textarea id="htmeditor"></textarea>
                 <script id="editor" src="https://htmeditor.com/js/htmeditor.min.js" htmeditor_textarea="htmeditor" full_screen="no" editor_height="1500" run_local="no"></script>
                 </div>
             </div>
-            <div class="resizer"></div>
-            <div class="div-right">
+            <div id="div-info" style="display: none;">
+                Exam Info
+            </div>
+            <div id="resizer"></div>
+            <div id="div-diagram">
                 <div class="control-panel">
                     <div class="room-div">
                         <select id="room-input" class="room" name="room" onchange="confirmAndCreateTables();">
@@ -122,13 +128,16 @@
                     </div>
                 </div>
                 <div class="screen">TV Screen / White board</div>
-                <div class="room-diagram">
+                <div class="diagram">
                     <div id="tables" class="tables">
                         <div class="to-insert-before"></div>
                     </div>
                     <div id="grid" class="grid ui-widget-header"></div>
                 </div>
                 <div class="screen-rotated">TV Screen / White board</div>
+            </div>
+            <div id="div-doc" style="display: none;">
+                <iframe id="doc-frame" src="https://docs.google.com/document/d/1cRMfJNIbz-jJAbK1dsOgdb9IX-YymB5wlHIn_cXPr4w/edit" frameborder="0" marginheight="0" marginwidth></iframe>
             </div>
         </div>
     </div>
