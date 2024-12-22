@@ -339,6 +339,48 @@ button#doc-tab.active {
     width: 50%;
 }
 
+#div-info > *{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#info-row-4, #info-row-5 {
+    justify-content: center;
+}
+
+.info-input {
+    border: none;
+    margin: 2vh;
+    height: 5vh;
+    width: 5vw;
+    font-size: 20px;
+}
+
+.info-input:hover {
+    border: red 1px solid;
+}
+
+#info-exam-name {
+    width: 30%;
+    text-align: center;
+}
+
+#info-unit {
+    width: 50%;
+    text-align: center;
+}
+
+#info-exam-type {
+    width: 30%;
+    text-align: center;
+}
+
+#info-exam-password {
+    width: 30%;
+    text-align: center;
+}
+
 .editor-container {
     left: 0;
     position: absolute;
@@ -584,6 +626,6 @@ button#doc-tab.active {
 }
 
 iframe {
-    height: 100vh;
     width: 100vw;
+    height: 96.5vh; /* 100vh - tabs vh */
 }

@@ -9,6 +9,12 @@ let newCurrentTime = 0;
 let intervalId = '';
 let progressBar = document.querySelectorAll('.progress-bar');
 
+// $( "#resizer" ).draggable({ axis: "x" });
+
+// let innerHeight = window.innerHeight;
+// console.log(innerHeight);
+// document.querySelector("#sheet").style.height = `${innerHeight}px`;
+
 function openTab(evt, tabName) {
     // Declare all variables
     let i, tabcontent, tablinks;
@@ -34,11 +40,11 @@ function toggleTimer() {
     ribbonDisplay = document.getElementById('div-top').style.display;
     if (ribbonDisplay=="flex" || ribbonDisplay=="") {
         document.getElementById('div-top').style.display = "none";
-        document.querySelector('#toggle-timer').className = "fa-solid fa-hourglass hidden"
+        document.querySelector('#toggle-timer').className = "fa-solid fa-hourglass-half hidden"
     }
     else {
         document.getElementById('div-top').style.display = "flex";
-        document.querySelector('#toggle-timer').className = "fa-solid fa-hourglass"
+        document.querySelector('#toggle-timer').className = "fa-solid fa-hourglass-half"
     }
 }
 
@@ -1007,3 +1013,8 @@ function rotateDiagram() {
 // 
 // 
 // //
+
+// resizing
+// exam info
+// add instruction for paper-based exam
+// 

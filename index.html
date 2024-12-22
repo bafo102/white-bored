@@ -14,8 +14,8 @@
     </div>
     <div id="toggle-panel">
         <button id="toggle-timer" class="fa-solid fa-hourglass-half" onclick="toggleTimer();"></button>
-        <button id="toggle-doc" class="fa-solid fa-file-word hidden" onclick="toggleDoc();"></button>
         <button id="toggle-info" class="fa-solid fa-circle-info hidden" onclick="toggleInfo();"></button>
+        <button id="toggle-doc" class="fa-solid fa-file-word hidden" onclick="toggleDoc();"></button>
     </div>
     <div id="main" class="tabcontent">
         <div id="div-top" class="div-top">
@@ -60,14 +60,112 @@
             </div>
         </div>
         <div class="div-bottom">
-            <div id="div-editor">
+            <div id="div-editor" style="display: none;">
                 <div class="editor-container">
                 <textarea id="htmeditor"></textarea>
                 <script id="editor" src="https://htmeditor.com/js/htmeditor.min.js" htmeditor_textarea="htmeditor" full_screen="no" editor_height="1500" run_local="no"></script>
                 </div>
             </div>
-            <div id="div-info" style="display: none;">
-                Exam Info
+            <div id="div-info" style="display: visible;">
+                <div id="info-row-1">
+                    <input id="info-exam-name" class="info-input" name="exams" placeholder="Select" list="exams">
+                        <datalist id="exams">
+                            <option value="Diagnostic Exam">
+                            <option value="Midterm Exam">
+                            <option value="Test">
+                            <option value="Final Exam">    
+                        </datalist>
+                </div>
+                <div id="info-row-2">
+                    <input id="info-unit" class="info-input" placeholder="Select" list="units">
+                        <datalist id="units">
+                            <option value="Analytics Programming">
+                            <option value="Applications of Big Data">
+                            <option value="Bank Management">
+                            <option value="Business Law">
+                            <option value="Consumer Behaviour">
+                            <option value="Corporate Finance">
+                            <option value="Derivatives">
+                            <option value="Economic and Financial Modelling">
+                            <option value="Enterprise Innovation and Markets">
+                            <option value="Export Strategy and Applications">
+                            <option value="Financial Institutions and Market">
+                            <option value="Financing Enterprises">
+                            <option value="Globalisation and Sustainability">
+                            <option value="Innovation, Enterprise and Society">
+                            <option value="International Business">
+                            <option value="International Business Strategy">
+                            <option value="International Finance">
+                            <option value="International Marketing">
+                            <option value="Investment Management">
+                            <option value="Machine Learning">
+                            <option value="Managerial Accounting">
+                            <option value="Marketing and Digital Communications">
+                            <option value="Principles of Accounting">
+                            <option value="Principles of Economics">
+                            <option value="Principles of Management">
+                            <option value="Principles of Marketing">
+                            <option value="Security Analysis and Business Valuation">
+                            <option value="Social Web Analytics">
+                            <option value="Statistics for Business">
+                            <option value="The Markets of Asia">
+                            <option value="Thinking About Data">
+                            <option value="Visual Analytics">                        
+                        </datalist>
+                </div>
+                <div id="info-row-3">
+                    <label for="Date">Date:</label>
+                    <input id="info-date" class="info-input" placeholder="Date">
+
+                    <label for="time">Time:</label>
+                    <input id="info-time" class="info-input" name="time" placeholder="Select" list="time">
+                        <datalist id="time">
+                            <option value="9:00">
+                            <option value="13:00">
+                            <option value="14:00">
+                            <option value="15:30">
+                        </datalist>
+                    
+                    <label for="duration">Duration:</label>
+                    <input id="info-duration" class="info-input" name="duration" placeholder="Select" list="duration">
+                        <datalist id="duration">
+                            <option value="40 minutes">
+                            <option value="60 minutes">
+                            <option value="75 minutes">
+                            <option value="90 minutes">
+                            <option value="120 minutes">
+                            <option value="180 minutes">
+                        </datalist>
+                    
+                    <label for="classroom">Classroom:</label>
+                    <input id="info-classroom" class="info-input" name="classroom" placeholder="Select" list="classrooms">
+                        <datalist id="classrooms">
+                            <option value="D1.02">
+                            <option value="D1.03">
+                            <option value="D1.04">
+                            <option value="D2.01">
+                            <option value="D2.02">
+                            <option value="D2.03">
+                            <option value="D2.04">
+                            <option value="D3.01">
+                            <option value="D3.02">
+                            <option value="D3.03">
+                            <option value="D3.04">
+                            <option value="D4.01">
+                        </datalist>
+                </div>
+                <div id="info-row-4">
+                    <label for="type">Exam Type:</label>
+                    <input id="info-exam-type" class="info-input" name="type" placeholder="Select" list="type">
+                    <datalist id="type">
+                    <option value="Closed-book">
+                    <option value="Open-book">
+                    </datalist>
+                </div>
+                <div id="info-row-5">
+                    <label for="password">Exam Password:</label>
+                    <input id="info-exam-password" class="info-input" name="password" placeholder="Type">
+                </div>
             </div>
             <div id="resizer"></div>
             <div id="div-diagram">
@@ -145,7 +243,7 @@
         <iframe src="https://docs.google.com/document/d/1cRMfJNIbz-jJAbK1dsOgdb9IX-YymB5wlHIn_cXPr4w/edit" frameborder="0" marginheight="0" marginwidth></iframe>
     </div>
     <div id="sheet" class="tabcontent">
-        <iframe src="https://docs.google.com/spreadsheets/d/1LBkLITHHLLSoBEYtyLT0gbEZFJl400XKv8Kl2MHP-Rs/edit?usp=sharing" frameborder="0" marginheight="0" marginwidth></iframe>
+        <iframe src="https://docs.google.com/spreadsheets/d/1LBkLITHHLLSoBEYtyLT0gbEZFJl400XKv8Kl2MHP-Rs/edit?usp=sharing"></iframe>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
