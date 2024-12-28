@@ -328,57 +328,83 @@ button#doc-tab.active {
     /* border: red 1px solid; */
 }
 
-#div-editor {
-    width: 50%;
-    position: relative;
-    display: flex;
-    justify-content: start;
-}
+/* INFO */
 
 #div-info {
     width: 50%;
 }
 
-#div-info > *{
+#div-info > * {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-}
-
-#info-row-4, #info-row-5 {
     justify-content: center;
+    font-size: 24px;
+    /* height: 5vh; */
+    /* border: black 1px solid; */
 }
 
-.info-input {
-    border: none;
-    margin: 2vh;
-    height: 5vh;
-    width: 5vw;
-    font-size: 20px;
-}
-
-.info-input:hover {
-    border: red 1px solid;
+#info-row-1 {
+    margin-top: 2vh;;
 }
 
 #info-exam-name {
-    width: 30%;
+    margin-left: 5vw;
+    width: 90%;
     text-align: center;
 }
 
 #info-unit {
+    margin-left: 5vw;
+    width: 100%;
+    text-align: center;
+}
+
+.info-row {
+    display: flex;
+    justify-content: center;
+    /* border: 1px solid green; */
+    margin: 1vh 0 1vh 0;
+}
+
+.info-row > * {
     width: 50%;
+    margin: 0 2vh 0 2vh;
+    /* border: 1px red solid; */
+}
+
+.info-label {
+    text-align: right;
+}
+
+.info-input {
+    font-size: 24px;
+    font-weight: bold;
+    height: 4vh;
+    border: 1px solid transparent;
+    /* border: red 1px solid; */
+}
+
+.info-input:hover, #info-material-detail:hover {
+    border: red 1px solid;
+}
+
+#info-material-detail {
+    width: 90%;
+    font-size: 24px;
+    /* font-weight: bold; */
+    border: 1px solid transparent;
+    line-height: 1.5;
     text-align: center;
 }
 
-#info-exam-type {
-    width: 30%;
-    text-align: center;
-}
 
-#info-exam-password {
-    width: 30%;
-    text-align: center;
+/* EDITOR */
+
+#div-editor {
+    width: 50%;
+    position: relative;
+    display: flex;
+    justify-content: start;
 }
 
 .editor-container {

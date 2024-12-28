@@ -1,4 +1,5 @@
 document.getElementById("defaultOpen").click();
+updateInfoDate();
 let timerStatus = "pending";
 const ppButton = document.querySelector("#pp-button");
 const resetButton = document.querySelector("#reset-button");
@@ -14,6 +15,17 @@ let progressBar = document.querySelectorAll('.progress-bar');
 // let innerHeight = window.innerHeight;
 // console.log(innerHeight);
 // document.querySelector("#sheet").style.height = `${innerHeight}px`;
+
+function updateInfoDate() {
+    currentDate = new Date();
+    day = String(currentDate.getDate()).padStart(2, '0');
+    month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    year = currentDate.getFullYear();
+
+    formattedDate = `${day}/${month}/${year}`;
+    // console.log(formattedDate);
+    document.querySelector("#info-date").value = formattedDate;
+}
 
 function openTab(evt, tabName) {
     // Declare all variables
@@ -969,52 +981,71 @@ function rotateDiagram() {
 }
 
 
-// const resizer = document.getElementById('resizer');
-// const leftSection = document.getElementById('div-left');
-// const rightSection = document.getElementById('div-right');
+const sheetId = '1LBkLITHHLLSoBEYtyLT0gbEZFJl400XKv8Kl2MHP-Rs';
+const sheetName = 'Exam%20Info';
+const apiKey = 'AIzaSyDXuz7sy7GmvtsSaJpSoUu_2DwSlb72YDc';
+const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=${apiKey}`;
 
-// let isDragging = false;
+let dataObjects;
+async function fetchGoogleSheetData() {
+    const response = await fetch(url);
+    const sheetData = await response.json();
+    const sheetDataJson = sheetData.values
+    // console.log(sheetDataJson)
+    const headers = sheetDataJson[0];
+    // Map through the remaining rows to create an array of objects
+    dataObjects = sheetDataJson.slice(1).map(row => {
+        return headers.reduce((obj, header, index) => {
+            obj[header] = row[index]; // Assign value to header key
+            return obj;
+        }, {});
+    });
+}
 
-// resizer.addEventListener('mousedown', (e) => {
-//     isDragging = true;
-//     document.addEventListener('mousemove', handleMouseMove);
-//     document.addEventListener('mouseup', handleMouseUp);
-// });
+// store data to dataObjects
+fetchGoogleSheetData().then();
 
-// function handleMouseMove(e) {
-//     if (isDragging) {
-//         const containerRect = resizer.parentNode.getBoundingClientRect();
-//         const leftWidth = e.clientX - containerRect.left;
-//         const rightWidth = containerRect.width - leftWidth - resizer.offsetWidth;
+function updateExamInfo() {
+    exam = document.getElementById('info-exam-name').value
+    unit = document.getElementById('info-unit').value
+    if (exam != "" && unit !="") {
+        index = dataObjects.findIndex(item => item["Exam name"] === exam && item["Unit"] === unit);
+        console.log(index);
+        if (index != -1) {
+            duration = dataObjects[index]["Duration"];
+        document.getElementById('info-duration').value = duration
 
-//         if (leftWidth >= 50 && rightWidth >= 50) {
-//             leftSection.style.width = leftWidth + 'px';
-//             rightSection.style.width = rightWidth + 'px';
-//             resizer.style.left = leftWidth + 'px';
-//         }
-//     }
-// }
+        platform = dataObjects[index]["Platform"];
+        if (platform == "Paper") {
+            document.getElementById('info-row-7').style.display = "none";
+        }
+        else {
+            document.getElementById('info-row-7').style = "";
+        };
 
-// function handleMouseUp() {
-//     isDragging = false;
-//     document.removeEventListener('mousemove', handleMouseMove);
-//     document.removeEventListener('mouseup', handleMouseUp);
-// }
+        backtracking = dataObjects[index]["Backtracking"];
+        if (backtracking == "N/A") {
+            document.getElementById('info-row-8').style.display = "none";
+        }
+        else {
+            document.getElementById('info-row-8').style = "";
+        }
+        document.getElementById('info-backtracking').value = backtracking;
 
-// // Initial position of the resizer
-// resizer.style.left = leftSection.offsetWidth + 'px';
+        examType = dataObjects[index]["Exam type"];
+        document.getElementById('info-exam-type').value = examType
+        
+        materialDetails = dataObjects[index]["Material details"];
+        if (materialDetails == "None") {
+            document.getElementById('info-row-10').style.display = "none";
+        }
+        else {
+            document.getElementById('info-row-10').style = "";
+        }
+        document.getElementById('info-material-detail').textContent = materialDetails
+        } 
+    }
+};
 
-// exam type 
-// subject
-// date start duration
-// closed or open
-// wifi
-// exam password
-// 
-// 
-// //
-
-// resizing
-// exam info
-// add instruction for paper-based exam
-// 
+document.getElementById('info-exam-name').addEventListener('change', updateExamInfo);
+document.getElementById('info-unit').addEventListener('change', updateExamInfo);

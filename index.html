@@ -14,7 +14,7 @@
     </div>
     <div id="toggle-panel">
         <button id="toggle-timer" class="fa-solid fa-hourglass-half" onclick="toggleTimer();"></button>
-        <button id="toggle-info" class="fa-solid fa-circle-info hidden" onclick="toggleInfo();"></button>
+        <button id="toggle-info" class="fa-solid fa-circle-info" onclick="toggleInfo();"></button>
         <button id="toggle-doc" class="fa-solid fa-file-word hidden" onclick="toggleDoc();"></button>
     </div>
     <div id="main" class="tabcontent">
@@ -67,8 +67,8 @@
                 </div>
             </div>
             <div id="div-info" style="display: visible;">
-                <div id="info-row-1">
-                    <input id="info-exam-name" class="info-input" name="exams" placeholder="Select" list="exams">
+                <div id="info-row-1" class="info-row">
+                    <input id="info-exam-name" class="info-input" name="exams" placeholder="Select Exam" list="exams">
                         <datalist id="exams">
                             <option value="Diagnostic Exam">
                             <option value="Midterm Exam">
@@ -76,8 +76,8 @@
                             <option value="Final Exam">    
                         </datalist>
                 </div>
-                <div id="info-row-2">
-                    <input id="info-unit" class="info-input" placeholder="Select" list="units">
+                <div id="info-row-2" class="info-row">
+                    <input id="info-unit" class="info-input" placeholder="Select Subject / Unit" list="units">
                         <datalist id="units">
                             <option value="Analytics Programming">
                             <option value="Applications of Big Data">
@@ -113,11 +113,12 @@
                             <option value="Visual Analytics">                        
                         </datalist>
                 </div>
-                <div id="info-row-3">
-                    <label for="Date">Date:</label>
+                <div id="info-row-3" class="info-row">
+                    <div id="info-date-box" class="info-label">Date:</div>
                     <input id="info-date" class="info-input" placeholder="Date">
-
-                    <label for="time">Time:</label>
+                </div>
+                <div id="info-row-4" class="info-row">
+                    <div id="info-time-box" class="info-label">Time:</div>
                     <input id="info-time" class="info-input" name="time" placeholder="Select" list="time">
                         <datalist id="time">
                             <option value="9:00">
@@ -125,8 +126,9 @@
                             <option value="14:00">
                             <option value="15:30">
                         </datalist>
-                    
-                    <label for="duration">Duration:</label>
+                </div>
+                <div id="info-row-5" class="info-row">
+                    <div id="info-duration-box" class="info-label">Duration:</div>
                     <input id="info-duration" class="info-input" name="duration" placeholder="Select" list="duration">
                         <datalist id="duration">
                             <option value="40 minutes">
@@ -136,10 +138,11 @@
                             <option value="120 minutes">
                             <option value="180 minutes">
                         </datalist>
-                    
-                    <label for="classroom">Classroom:</label>
-                    <input id="info-classroom" class="info-input" name="classroom" placeholder="Select" list="classrooms">
-                        <datalist id="classrooms">
+                </div>
+                <div id="info-row-6" class="info-row">
+                    <div id="info-room-box" class="info-label">Room:</div>
+                    <input id="info-room" class="info-input" name="room" placeholder="Select" list="rooms">
+                        <datalist id="rooms">
                             <option value="D1.02">
                             <option value="D1.03">
                             <option value="D1.04">
@@ -154,22 +157,33 @@
                             <option value="D4.01">
                         </datalist>
                 </div>
-                <div id="info-row-4">
-                    <label for="type">Exam Type:</label>
-                    <input id="info-exam-type" class="info-input" name="type" placeholder="Select" list="type">
-                    <datalist id="type">
-                    <option value="Closed-book">
-                    <option value="Open-book">
-                    </datalist>
+                <div id="info-row-7" class="info-row">
+                    <div id="info-exam-password-box" class="info-label">Exam Password:</div>
+                    <input id="info-exam-password" class="info-input" name="password" placeholder="Input">
                 </div>
-                <div id="info-row-5">
-                    <label for="password">Exam Password:</label>
-                    <input id="info-exam-password" class="info-input" name="password" placeholder="Type">
+                <div id="info-row-8" class="info-row">
+                    <div id="info-backtracking-box" class="info-label">Backtracking:</div>
+                    <input id="info-backtracking" class="info-input" name="backtracking" placeholder="Select" list="backtracking">
+                        <datalist id="backtracking">
+                            <option value="Yes">
+                            <option value="No">
+                        </datalist>
+                </div>
+                <div id="info-row-9" class="info-row">
+                    <div id="info-exam-type-box" class="info-label">Exam Type:</div>
+                    <input id="info-exam-type" class="info-input" name="type" placeholder="Select" list="type">
+                        <datalist id="type">
+                            <option value="Closed-book">
+                            <option value="Open-book">
+                        </datalist>
+                </div>
+                <div id="info-row-10" class="info-row">
+                    <textarea id="info-material-detail" rows="5">...</textarea>
                 </div>
             </div>
             <div id="resizer"></div>
             <div id="div-diagram">
-                <div class="control-panel">
+                <div id="control-panel" class="control-panel">
                     <div class="room-div">
                         <select id="room-input" class="room" name="room" onchange="confirmAndCreateTables();">
                             <option value="Select room">Select room</option>
@@ -222,7 +236,6 @@
                             <input type="checkbox" id="grid-toggle">
                             <label class="grid-toggle-label" for="grid-toggle">Grid</label>
                         </div>
-                        
                     </div>
                 </div>
                 <div class="screen">TV Screen / White board</div>
@@ -248,6 +261,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
     <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
