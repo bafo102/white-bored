@@ -388,6 +388,10 @@ button#doc-tab.active {
     border: red 1px solid;
 }
 
+#info-exam-password {
+    color: red;
+}
+
 #info-material-detail {
     width: 90%;
     font-size: 24px;

@@ -1012,38 +1012,43 @@ function updateExamInfo() {
         index = dataObjects.findIndex(item => item["Exam name"] === exam && item["Unit"] === unit);
         console.log(index);
         if (index != -1) {
+            // update duration
             duration = dataObjects[index]["Duration"];
-        document.getElementById('info-duration').value = duration
+            document.getElementById('info-duration').value = duration
 
-        platform = dataObjects[index]["Platform"];
-        if (platform == "Paper") {
-            document.getElementById('info-row-7').style.display = "none";
-        }
-        else {
-            document.getElementById('info-row-7').style = "";
-        };
+            // update platform
+            platform = dataObjects[index]["Platform"];
+            if (platform == "Paper") {
+                document.getElementById('info-row-7').style.display = "none";
+            }
+            else {
+                document.getElementById('info-row-7').style = "";
+            };
 
-        backtracking = dataObjects[index]["Backtracking"];
-        if (backtracking == "N/A") {
-            document.getElementById('info-row-8').style.display = "none";
+            // update backtracking
+            backtracking = dataObjects[index]["Backtracking"];
+            if (backtracking == "N/A") {
+                document.getElementById('info-row-8').style.display = "none";
+            }
+            else {
+                document.getElementById('info-row-8').style = "";
+            }
+            document.getElementById('info-backtracking').value = backtracking;
+            
+            // update exam type
+            examType = dataObjects[index]["Exam type"];
+            document.getElementById('info-exam-type').value = examType
+            
+            // update material details
+            materialDetails = dataObjects[index]["Material details"];
+            if (materialDetails == "None") {
+                document.getElementById('info-row-10').style.display = "none";
+            }
+            else {
+                document.getElementById('info-row-10').style = "";
+            }
+            document.getElementById('info-material-detail').value = materialDetails
         }
-        else {
-            document.getElementById('info-row-8').style = "";
-        }
-        document.getElementById('info-backtracking').value = backtracking;
-
-        examType = dataObjects[index]["Exam type"];
-        document.getElementById('info-exam-type').value = examType
-        
-        materialDetails = dataObjects[index]["Material details"];
-        if (materialDetails == "None") {
-            document.getElementById('info-row-10').style.display = "none";
-        }
-        else {
-            document.getElementById('info-row-10').style = "";
-        }
-        document.getElementById('info-material-detail').textContent = materialDetails
-        } 
     }
 };
 
