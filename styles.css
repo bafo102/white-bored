@@ -437,7 +437,7 @@ button#doc-tab.active {
     width: 100%;
 }
 
-.control-panel {
+#control-panel {
     display: flex;
     justify-content: start;
     align-items: center;
@@ -445,6 +445,7 @@ button#doc-tab.active {
     height: 5%;
     margin-top: 0.5%;
     margin-bottom: 1%;
+    /* border: 1px solid red; */
 }
 
 .room-div {
@@ -506,32 +507,47 @@ button#doc-tab.active {
     font-size: 1em;
 }
 
-.screen {
-    display: block;
-    height: 3.5%;
-    width: 30%;
-    margin-left: 35%;
-    margin-top: 3%;
-    margin-bottom: 2%;
-    font-size: 2vh;
-    font-weight: bold;
-    padding-top: 0.5vh;
-    border: 1px solid rgb(155, 95, 95);
-    text-align: center;
+#screen-div, #screen-rotated-div {
+    /* border: 1px solid green; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2vh 0;
 }
 
-.screen-rotated {
-    display: none;
-    height: 3.5%;
+#screen, #screen-rotated {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3.5vh;
     width: 30%;
-    margin-left: 35%;
-    margin-top: 2%;
-    margin-bottom: 3%;
     font-size: 2vh;
     font-weight: bold;
-    padding-top: 0.5vh;
-    border: 1px solid rgb(155, 95, 95);
     text-align: center;
+    border: 1px solid rgb(155, 95, 95);
+}
+
+#control-panel-opener, #control-panel-opener-rotated {
+    position: absolute;
+    right: 1vw;
+    border-radius: 50%;
+    width: 2vw;
+    height: 2vw;
+    border: none;
+    background-color: white;
+}
+
+#control-panel-opener:hover, #control-panel-opener-rotated:hover {
+    background: lightgray;
+    cursor: pointer;
+}
+
+#screen-rotated-div {
+    display: none;
+}
+
+.fa-solid.fa-chevron-down, .fa-solid.fa-chevron-up {
+    font-size: 2vh;
 }
 
 .diagram {

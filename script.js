@@ -966,20 +966,49 @@ function rotateDiagram() {
         
     }
 
-    screenDisplay = document.querySelector('.screen').style.display;
-    if (screenDisplay=="block" || screenDisplay=="") {
-        console.log('screen display is block')
-        document.querySelector('.screen').style.display = "none";
-        document.querySelector('.screen-rotated').style.display = "block";
+    screenDisplay = document.querySelector('#screen-div').style.display;
+    screenRotatedDisplay = document.querySelector('#screen-rotated-div').style.display;
+    if (screenDisplay=="flex" || screenDisplay=="") {
+        console.log('screen display is flex')
+        document.querySelector('#screen-div').style.display = "none";
+        document.querySelector('#screen-rotated-div').style.display = "flex";
         }
     else {
-        document.querySelector('.screen').style.display = "block";
-        document.querySelector('.screen-rotated').style.display = "none";
+        document.querySelector('#screen-div').style.display = "flex";
+        document.querySelector('#screen-rotated-div').style.display = "none";
         }
     console.log(`Tables rotated`)
     reportRoom();
 }
 
+function showAndHideControlPanel() {
+    controlPanelDisplay = document.querySelector('#control-panel').style.display;
+    // show / hide control panel
+    if (controlPanelDisplay == 'flex' || controlPanelDisplay == '') {
+        console.log('controlPanelDisplay is flex')
+        document.querySelector('#control-panel').style.display = "none";
+    }
+    else {
+        document.querySelector('#control-panel').style.display = 'flex';
+    }
+
+    // update both buttons
+    controlPanelButton = document.querySelector('#control-panel-opener i');
+    controlPanelButtonRotated = document.querySelector('#control-panel-opener-rotated i');
+    
+    if (controlPanelButton.className == 'fa-solid fa-chevron-up') {
+        controlPanelButton.className = 'fa-solid fa-chevron-down';
+        controlPanelButtonRotated.className = 'fa-solid fa-chevron-down';
+    }
+    else {
+        controlPanelButton.className = 'fa-solid fa-chevron-up';
+        controlPanelButtonRotated.className = 'fa-solid fa-chevron-up';
+    }
+
+}
+
+document.querySelector('#control-panel-opener').addEventListener('click', showAndHideControlPanel);
+document.querySelector('#control-panel-opener-rotated').addEventListener('click', showAndHideControlPanel);
 
 const sheetId = '1LBkLITHHLLSoBEYtyLT0gbEZFJl400XKv8Kl2MHP-Rs';
 const sheetName = 'Exam%20Info';
