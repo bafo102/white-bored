@@ -488,10 +488,10 @@ button#doc-tab.active {
 .small-button {
     border: none;
     border-radius: 50%;
-    height: 88%;
+    height: 70%;
     background-color: white;
     aspect-ratio: 1/1;
-    font-size: 2.2vh;
+    font-size: 1.8vh;
     cursor: pointer;
 }
 

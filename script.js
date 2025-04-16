@@ -1070,13 +1070,11 @@ function updateExamInfo() {
             
             // update material details
             materialDetails = dataObjects[index]["Material details"];
+            document.getElementById('info-material-detail').value = materialDetails;
             if (materialDetails == "None") {
-                document.getElementById('info-row-10').style.display = "none";
+                document.getElementById('info-material-detail').value = '';
             }
-            else {
-                document.getElementById('info-row-10').style = "";
-            }
-            document.getElementById('info-material-detail').value = materialDetails
+            
         }
     }
 };
