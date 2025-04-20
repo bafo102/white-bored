@@ -1048,19 +1048,20 @@ function updateExamInfo() {
             // update platform
             platform = dataObjects[index]["Platform"];
             if (platform == "Paper") {
-                document.getElementById('info-row-7').style.display = "none";
-            }
-            else {
-                document.getElementById('info-row-7').style = "";
-            };
-
-            // update backtracking
-            backtracking = dataObjects[index]["Backtracking"];
-            if (backtracking == "N/A") {
                 document.getElementById('info-row-8').style.display = "none";
             }
             else {
                 document.getElementById('info-row-8').style = "";
+            };
+
+            // update backtracking
+            backtracking = dataObjects[index]["Backtracking"];
+            console.log(backtracking);
+            if (backtracking == "N/A") {
+                document.getElementById('info-row-9').style.display = "none";
+            }
+            else {
+                document.getElementById('info-row-9').style = "";
             }
             document.getElementById('info-backtracking').value = backtracking;
             
