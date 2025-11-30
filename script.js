@@ -369,6 +369,15 @@ const cluster = [3, 10, 3];
 const cluster_i = [3, 10, 3];
 
 // table coordinates [t, l, name]
+
+const room_101 = [
+    [[1,3],"rectangle"],[[1,9],"rectangle"],[[1,21],"rectangle"],[[1,27],"rectangle"],
+    [[7,3],"rectangle"],[[7,9],"rectangle"],[[7,21],"rectangle"],[[7,27],"rectangle"],
+    [[13,3],"rectangle"],[[13,9],"rectangle"],[[13,21],"rectangle"],[[13,27],"rectangle"],
+    [[19,3],"rectangle"],[[19,9],"rectangle"],[[19,21],"rectangle"],[[19,27],"rectangle"],
+    [[25,3],"rectangle"],[[25,9],"rectangle"],[[25,21],"rectangle"],[[25,27],"rectangle"]
+];
+
 const room_103 = [
     [[1,6],"trapezoid-i"],[[1,10.5],"trapezoid"],
     [[7,1.5],"trapezoid-i"],[[7,6],"trapezoid"],[[7,12],"half-rounded"],[[7,24],"trapezoid"],[[7,28.5],"trapezoid-i"],
@@ -436,8 +445,8 @@ const room_01_02 = [
 
 let room_custom;
 
-const roomInputs = ["Custom", "D1.03", "D1.04", "D2.03", "D2.04", "D3.03", "D3.04", "D4.01", "D4.01.b"];
-const rooms = [room_custom, room_103, room_104, room_203, room_204, room_303, room_304, room_401, room_401_b];
+const roomInputs = ["Custom", "D1.01", "D1.03", "D1.04", "D2.03", "D2.04", "D3.03", "D3.04", "D4.01", "D4.01.b"];
+const rooms = [room_custom, room_101, room_103, room_104, room_203, room_204, room_303, room_304, room_401, room_401_b];
 
 const tableNames = ["half-rounded", "all-rounded-2", "all-rounded-3", "rectangle", "rectangle-2", "trapezoid", "trapezoid-i", "cluster", "cluster-i"];
 const tables = [half_rounded, all_rounded_2, all_rounded_3, rectangle, rectangle_2, trapezoid, trapezoid_i, cluster, cluster_i];
